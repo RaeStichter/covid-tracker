@@ -5,11 +5,11 @@ const button = document.querySelector("button");
 const input = document.getElementById("state-input");
 
 // Create an li element
-// const liMaker = (text) => {
-//   const li = document.createElement("li");
-//   li.textContent = text;
-//   ul.appendChild(li);
-// };
+const liMaker = (text) => {
+  const li = document.createElement("li");
+  li.textContent = text;
+  ul.appendChild(li);
+};
 
 // Event listener to listen for the submit on the form
 // form.addEventListener("submit", function (e) {
