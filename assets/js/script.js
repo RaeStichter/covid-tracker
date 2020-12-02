@@ -3,6 +3,7 @@ const form = document.querySelector("#form"); // RS added #
 const ul = document.querySelector("ul");
 const button = document.querySelector("button");
 const input = document.getElementById("stacked-state");
+const apiDataEl = document.getElementById("api-data-display");
 
 // Create an li element
 const liMaker = (text) => {
@@ -57,7 +58,7 @@ var displayData = function(stateSearch, data) {
 
 
   // append conatiner to DOM
-  form.appendChild(stateData);
+  apiDataEl.appendChild(stateData);
 };
 
 
