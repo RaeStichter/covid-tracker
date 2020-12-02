@@ -2,7 +2,7 @@
 const form = document.querySelector("#form"); // RS added #
 const ul = document.querySelector("ul");
 const button = document.querySelector("button");
-const input = document.getElementById("state-input");
+const input = document.getElementById("stacked-state");
 
 // Create an li element
 const liMaker = (text) => {
