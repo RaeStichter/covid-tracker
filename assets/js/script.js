@@ -4,6 +4,8 @@ const ul = document.querySelector("ul");
 const button = document.querySelector("button");
 const input = document.getElementById("stacked-state");
 const apiDataEl = document.getElementById("api-data-display");
+var searchedStatesArray = [];
+var searchedStatesEl = document.querySelector("#searched-states");
 
 // Create an li element
 const liMaker = (text) => {
@@ -45,12 +47,12 @@ var displayData = function(stateSearch, data) {
   // create a container for the state data
   var stateData = document.createElement("div");
 
-  // create a span element to hold the state name
-  var stateName = document.createElement("span");
-  stateName.textContent = stateSearch;
+//   // create a span element to hold the state name
+//   var stateName = document.createElement("span");
+//   stateName.textContent = stateSearch;
 
-  // append to container
-  stateData.appendChild(stateName);
+//   // append to container
+//   stateData.appendChild(stateName);
 
   // create a span element for the total positive cases
   //var positiveCases = document.createElement("span");
@@ -61,14 +63,18 @@ var displayData = function(stateSearch, data) {
   apiDataEl.appendChild(stateData);
 };
 
-
-
-
-
-
-
-
-
+// function to display list of searched states from local storage
+var printStateList = function() {
+    var stateList = JSON.parse(localStorage.getItem("states"));
+    if (stateList) {
+        searchedStatesArray = stateList;
+    }
+    searchedStatesEl.textContent = "";
+    for (i = 0; i < searchedStatesArray.length; i++) {
+        var searchedState = $("<li>").text(searchedStatesArray[i]);
+        $(searchedStatesEl).append(searchedState);
+    }; 
+}
 
 
 var formSubmitHandler = function(event) {
@@ -76,6 +82,23 @@ var formSubmitHandler = function(event) {
   console.log("function was called");
 
   var stateSearch = input.value.trim(); // this will get the user input from the form
+
+  // save to local storage
+  var stateList = JSON.parse(localStorage.getItem("states"));
+    if (stateList) {
+        searchedStatesArray = stateList;
+        if (searchedStatesArray.includes(stateSearch)) {
+        }
+        else {
+            searchedStatesArray.push(stateSearch);
+        localStorage.setItem("states", JSON.stringify(searchedStatesArray));
+        };
+    }
+    else {
+        searchedStatesArray.push(stateSearch);
+        localStorage.setItem("states", JSON.stringify(searchedStatesArray)); 
+    };
+    printStateList();
 
   // error handling and function pass through
   if (stateSearch) { // if a value is entered, continue
@@ -87,6 +110,7 @@ var formSubmitHandler = function(event) {
   }
 };
 
+printStateList();
 
 
 form.addEventListener("submit", formSubmitHandler);
