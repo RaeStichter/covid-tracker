@@ -6,6 +6,7 @@ const input = document.getElementById("stacked-state");
 const apiDataEl = document.getElementById("api-data-display");
 var searchedStatesArray = [];
 var searchedStatesEl = document.querySelector("#searched-states");
+var clearButtonEl = document.querySelector("#clear-btn")
 
 // Create an li element
 const liMaker = (text) => {
@@ -110,7 +111,18 @@ var formSubmitHandler = function(event) {
   }
 };
 
+// call function to display list of searched states
 printStateList();
 
+// function to clear searched states
+var clearStates = function () {
+  searchedStatesEl.textContent = "";
+}
 
 form.addEventListener("submit", formSubmitHandler);
+
+// event listener for clear all button
+$(clearButtonEl).on("click", function(event) {
+  event.preventDefault();
+  clearStates();
+})
