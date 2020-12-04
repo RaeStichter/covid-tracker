@@ -116,6 +116,8 @@ printStateList();
 
 // function to clear searched states
 var clearStates = function () {
+  localStorage.removeItem("states");
+  searchedStatesArray = [];
   searchedStatesEl.textContent = "";
 }
 
