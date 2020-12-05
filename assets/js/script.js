@@ -8,6 +8,11 @@ var searchedStatesArray = [];
 var searchedStatesEl = document.querySelector("#searched-states");
 var clearButtonEl = document.querySelector("#clear-btn")
 
+var stateCodeIndex = ["AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC","DE", "FL", "GA", "GU",
+"HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MP", "MS",
+"MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC",
+"SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
+
 // Create an li element
 const liMaker = (text) => {
   const li = document.createElement("li");
@@ -29,12 +34,24 @@ const liMaker = (text) => {
 var getStateData = function(stateSearch) {
   console.log("get state data was called, this is where APIS will be called.");
 
-  var apiCovid = "https://api.covidtracking.com/v1/states/current.json";
+  // get index of state to be used in DisplayData
+  var stateIndex = stateCodeIndex.indexOf(stateSearch);
+  console.log(stateIndex);
 
-  fetch(apiCovid).then(function(response) {
+  var apiOpenCovid = "https://api.covidtracking.com/v1/states/current.json";
+
+  fetch(apiOpenCovid).then(function(response) {
     response.json().then(function(data) {
-      displayData(stateSearch, data);
-      console.log(data);
+      var apiCovid = "https://api.covid19api.com/summary";
+      fetch(apiCovid).then(function(response) {
+        response.json().then(function(info) {
+          console.log(info);
+          console.log(data);
+          displayData(stateIndex, data);
+        });
+      });
+      // displayData(stateSearch, data);
+      // console.log(data);
     });
   });
 
@@ -42,21 +59,82 @@ var getStateData = function(stateSearch) {
 
 
 
-var displayData = function(stateSearch, data) {
-  console.log(stateSearch, data);
+var displayData = function(stateIndex, data) {
+  console.log(stateIndex, data);
+
+  // ------------ Variables for all of the state information
+  var stateInfo = [
+    {
+      stat: "State: ",
+      data: data[stateIndex].state
+    },
+    {
+      stat: "Probable Cases: ",
+      data: data[stateIndex].probableCases
+    },
+    {
+      stat: "Positive Cases: ",
+      data: data[stateIndex].positive
+    },
+    {
+      stat: "Hospitalized Currently: ",
+      data: data[stateIndex].hospitalizedCurrently
+    },
+    {
+      stat: "Deaths: ",
+      data: data[stateIndex].death
+    },
+    {
+      stat: "Negative Cases: ",
+      data: data[stateIndex].negative
+    },
+    {
+      stat: "Recovered Cases: ",
+      data: data[stateIndex].recovered
+    },
+    {
+      stat: "Total Cases: ",
+      data: data[stateIndex].total
+    }
+  ];
+  // var state = data[stateIndex].state;
+  // var positiveCases = data[stateIndex].positive;
+  // var deaths = data[stateIndex].death;
+  // var hospitalCurrent = data[stateIndex].hospitalizedCurrently;
+  // var caseTotal = data[stateIndex].total;
+  // var negativeTest = data[stateIndex].negative;
+  // var probableCases = data[stateIndex].probableCases;
+  // var recoveredCases = data[stateIndex].recovered;
+  
+  console.log(stateInfo);
+  
+  
+  //console.log(state, positiveCases, deaths,hospitalCurrent, caseTotal, negativeTest, probableCases, recoveredCases);
+  
 
   // create a container for the state data
   var stateData = document.createElement("div");
 
-//   // create a span element to hold the state name
-//   var stateName = document.createElement("span");
-//   stateName.textContent = stateSearch;
 
-//   // append to container
-//   stateData.appendChild(stateName);
+  // loop through the API data contained in stateInfo
+  for (i = 0; i < stateInfo.length; i++) {
+   
+    // create a span element to hold the data
+    var stateNameEl = document.createElement("div");
+    
+    stateNameEl.textContent = stateInfo[i].stat + stateInfo[i].data;
+    //console.log(stateNameEl);
+
+    // append to container
+    stateData.appendChild(stateNameEl);
+  }
+
+  
+
 
   // create a span element for the total positive cases
-  //var positiveCases = document.createElement("span");
+  //var positiveCasesEl = document.createElement("span");
+
 
 
 
