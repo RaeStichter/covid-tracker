@@ -27,7 +27,11 @@ var displaySymptoms = function() {
         console.log(symptomsArray);
         for (l = 0; l < symptomsArray.length; l++) {
             let li = document.createElement("li");
+<<<<<<< HEAD
             // li.addClass = ""
+=======
+            // li.addClass = 
+>>>>>>> 74139f6e89c0ac639494ee986342bba70bda48d4
             li.textContent = symptomsArray[l];
             symptoms.appendChild(li);
         }     
