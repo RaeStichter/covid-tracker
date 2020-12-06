@@ -266,6 +266,7 @@ const latLngStates = [
     "latitude":42.7475,
     "longitude":-107.2085
   }
+
 ];
 
 let map;
@@ -301,6 +302,7 @@ const eqfeed_callback = function (latLngStates) {
   }
 };
 
+
 const latLngCall = function(stateCodeIndex) {
 
 }
@@ -324,7 +326,9 @@ const liMaker = (text) => {
 // --------------------------------------------------RS Added ------------------------------------------------
 
 
+
 var getStateData = function(stateSearch) {
+
   console.log("get state data was called, this is where APIS will be called.");
 
   // get index of state to be used in DisplayData
@@ -333,11 +337,13 @@ var getStateData = function(stateSearch) {
 
   var apiOpenCovid = "https://api.covidtracking.com/v1/states/current.json";
 
+
   fetch(apiOpenCovid).then(function(response) {
     response.json().then(function(data) {
       var apiCovid = "https://api.covid19api.com/summary";
       fetch(apiCovid).then(function(response) {
         response.json().then(function(info) {
+
           console.log(info);
           console.log(data);
           displayData(stateIndex, data);
@@ -348,17 +354,20 @@ var getStateData = function(stateSearch) {
     });
   });
 
+
 };
 
 
 
 var displayData = function(stateIndex, data) {
+
   console.log(stateIndex, data);
 
   // ------------ Variables for all of the state information
   var stateInfo = [
     {
       stat: "State: ",
+
       data: data[stateIndex].state
     },
     {
@@ -389,6 +398,7 @@ var displayData = function(stateIndex, data) {
       stat: "Total Cases: ",
       data: data[stateIndex].total
     }
+
   ];
   // var state = data[stateIndex].state;
   // var positiveCases = data[stateIndex].positive;
@@ -398,6 +408,7 @@ var displayData = function(stateIndex, data) {
   // var negativeTest = data[stateIndex].negative;
   // var probableCases = data[stateIndex].probableCases;
   // var recoveredCases = data[stateIndex].recovered;
+
   
   console.log(stateInfo);
   
@@ -409,18 +420,21 @@ var displayData = function(stateIndex, data) {
   var stateData = document.createElement("div");
 
 
+
   // loop through the API data contained in stateInfo
   for (i = 0; i < stateInfo.length; i++) {
    
     // create a span element to hold the data
     var stateNameEl = document.createElement("div");
     
+
     stateNameEl.textContent = stateInfo[i].stat + stateInfo[i].data;
     //console.log(stateNameEl);
 
     // append to container
     stateData.appendChild(stateNameEl);
   }
+
 
   
 
@@ -436,6 +450,7 @@ var displayData = function(stateIndex, data) {
 };
 
 // function to display list of searched states from local storage
+
 var printStateList = function() {
     var stateList = JSON.parse(localStorage.getItem("states"));
     if (stateList) {
@@ -450,6 +465,7 @@ var printStateList = function() {
 
 
 var formSubmitHandler = function(event) {
+
   event.preventDefault(); // prevents default action of browser, we then can specify what to do
   console.log("function was called");
 
@@ -457,6 +473,7 @@ var formSubmitHandler = function(event) {
 
   // save to local storage
   var stateList = JSON.parse(localStorage.getItem("states"));
+
     if (stateList) {
         searchedStatesArray = stateList;
         if (searchedStatesArray.includes(stateSearch)) {
@@ -478,6 +495,7 @@ var formSubmitHandler = function(event) {
     input.value = ""; // clears the field for the next search
   }
   else {
+
     alert("Please enter a State."); // this will eventually need to be a modal
   }
 };
@@ -490,6 +508,7 @@ var clearStates = function () {
   localStorage.removeItem("states");
   searchedStatesArray = [];
   searchedStatesEl.textContent = "";
+
 }
 
 // function to save symptoms to local storage
@@ -575,6 +594,7 @@ var saveSymptoms = function() {
 form.addEventListener("submit", formSubmitHandler);
 
 // event listener for clear all button
+
 $(clearButtonEl).on("click", function(event) {
   event.preventDefault();
   clearStates();
