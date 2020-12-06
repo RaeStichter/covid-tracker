@@ -494,6 +494,14 @@ var clearStates = function () {
 
 // function to save symptoms to local storage
 var saveSymptoms = function() {
+  var symptomList = JSON.parse(localStorage.getItem("symptoms"));
+    if (symptomList) {
+        symptomsLogArray = symptomList;
+    }
+    // else {
+    //   symptomsLogArray = [];
+    // };
+
   var symptomsArray = [];
   var symptomDate = document.getElementById("dateofsymptoms").value;
   symptomsArray.push(symptomDate);
@@ -555,8 +563,7 @@ var saveSymptoms = function() {
     symptomsArray.push("Diarrhea");
   }
   else {};
-
-  
+ 
   symptomsLogArray.push(symptomsArray);
   console.log(symptomsArray);
   console.log(symptomsLogArray);
