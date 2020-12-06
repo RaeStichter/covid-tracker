@@ -6,7 +6,9 @@ const input = document.getElementById("stacked-state");
 const apiDataEl = document.getElementById("api-data-display");
 var searchedStatesArray = [];
 var searchedStatesEl = document.querySelector("#searched-states");
-var clearButtonEl = document.querySelector("#clear-btn")
+var clearButtonEl = document.querySelector("#clear-btn");
+var saveButtonEl = document.querySelector("#save-btn");
+var symptomsLogArray = [];
 
 var stateCodeIndex = ["AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC","DE", "FL", "GA", "GU",
 "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MP", "MS",
@@ -490,10 +492,89 @@ var clearStates = function () {
   searchedStatesEl.textContent = "";
 }
 
+// function to save symptoms to local storage
+var saveSymptoms = function() {
+  var symptomsArray = [];
+  var symptomDate = document.getElementById("dateofsymptoms").value;
+  symptomsArray.push(symptomDate);
+  var symptomTemp = document.getElementById("aligned-temp").value;
+  symptomsArray.push(symptomTemp);
+
+  
+  if($("#checkbox-radio-chills-yes").is(':checked')) {
+    symptomsArray.push("Chills");
+  }
+  else {};
+
+      if($("#checkbox-radio-cough-yes").is(':checked')) {
+    symptomsArray.push("Cough");
+  }
+  else {};
+
+  if($("#checkbox-radio-shortness-yes").is(':checked')) {
+    symptomsArray.push("Shortness of Breath or Difficulty Breathing");
+  }
+  else {};
+
+  if($("#checkbox-radio-fatigue-yes").is(':checked')) {
+    symptomsArray.push("Fatigue");
+  }
+  else {};
+
+  if($("#checkbox-radio-aches-yes").is(':checked')) {
+    symptomsArray.push("Muscle or Body Aches");
+  }
+  else {};
+
+  if($("#checkbox-radio-headache-yes").is(':checked')) {
+    symptomsArray.push("Headache");
+  }
+  else {};
+
+  if($("#checkbox-radio-loss-yes").is(':checked')) {
+    symptomsArray.push("New Loss of Taste or Smell");
+  }
+  else {};
+
+  if($("#checkbox-radio-throat-yes").is(':checked')) {
+    symptomsArray.push("Sore Throat");
+  }
+  else {};
+
+  if($("#checkbox-radio-congestion-yes").is(':checked')) {
+    symptomsArray.push("Congestion or Runny Nose");
+  }
+  else {};
+
+  if($("#checkbox-radio-nausea-yes").is(':checked')) {
+    symptomsArray.push("Nausea or Vommiting");
+  }
+  else {};
+
+  if($("#checkbox-radio-diarrhea-yes").is(':checked')) {
+    symptomsArray.push("Diarrhea");
+  }
+  else {};
+
+  
+  symptomsLogArray.push(symptomsArray);
+  console.log(symptomsArray);
+  console.log(symptomsLogArray);
+
+  // save symptoms to local storage
+  localStorage.setItem("symptoms", JSON.stringify(symptomsLogArray));  
+}
+
 form.addEventListener("submit", formSubmitHandler);
 
 // event listener for clear all button
 $(clearButtonEl).on("click", function(event) {
   event.preventDefault();
   clearStates();
+})
+
+// event listener for save symptoms button
+$(saveButtonEl).on("click", function(event) {
+  event.preventDefault();
+  saveSymptoms();
 })
