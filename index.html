@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>COVID-19 Tracker</title>
 </head>
@@ -26,7 +27,7 @@
 
                 <div class="pure-control-group">
                     <label for="dateofsymptoms">Date:</label>
-                    <input type="date" id="dateofsymptoms" />
+                    <input type="text" id="dateofsymptoms" placeholder="mm/dd/yyyy" />
                 </div>
 
                 <div class="pure-control-group">
@@ -229,6 +230,8 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCxWfkOM24&callback=initMap">
     </script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
