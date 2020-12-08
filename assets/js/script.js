@@ -538,21 +538,11 @@ $(clearButtonEl).on("click", function (event) {
 });
 
 // event listener for collapsible symptoms list
-
-// var M = document.querySelector("collapsible-body");
-
-// console.log(M);
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   var elems = document.querySelector(".collapsible-body");
-//   var M = M.Collapsible.init(elems, options);
-// });
-
 var coll = document.getElementsByClassName("collapsible");
 var i;
 
 for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
+  coll[i].addEventListener("click", function () {
     this.classList.toggle("active");
     var content = this.nextElementSibling;
     if (content.style.display === "block") {
