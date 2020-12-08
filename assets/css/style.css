@@ -2,6 +2,7 @@ ul {
   list-style-type: none;
 }
 
+/* Style footer */
 body {
   display: flex;
   min-height: 100vh;
