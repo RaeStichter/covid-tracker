@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>COVID-19 Tracker</title>
 </head>
@@ -16,129 +19,204 @@
 
 
 <!-- pure rows-->
-<div class="pure-g">
+<div class="row">
 
 <!-- symptoms tracking section-->
-    <div class="pure-u-1-3">
-        <form class="pure-form pure-form-aligned">
-            <h2>Symptoms Log</h2>
-            <fieldset>
-
-                <div class="pure-control-group">
-                    <label for="dateofsymptoms">Date:</label>
-                    <input type="date" id="dateofsymptoms" />
-                </div>
-
-                <div class="pure-control-group">
-                    <label for="aligned-temp">Temperature (°F)</label>
-                    <input type="text" id="aligned-temp" placeholder="Temperature" />
-                </div>
-
-                <div class="pure-control-group">
-                    <form class="pure-form">
-                    <label>Chills</label>
-                        <input type="radio" id="checkbox-radio-chills-yes" name="optionsRadios" value="Chills">Yes</label>
-                        <input type="radio" id="checkbox-radio-chills-no" name="optionsRadios" value="No Chills" /> No</label>
+    <div class="col s4">
+        <h2>Symptoms Log</h2>
+                <h4>Add New Symptoms</h4>
+                    <form>
+                            <div>
+                                <label for="dateofsymptoms">Date:</label>
+                                <input type="text" id="dateofsymptoms" placeholder="mm/dd/yyyy" />
+                            </div>
+        
+                            <div>
+                                <label for="aligned-temp">Temperature (°F)</label>
+                                <input type="text" id="aligned-temp" placeholder="Temperature" />
+                            </div>
+        
+                            <div>
+                                <form action="#">Chills
+                                    <p>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-chills-yes" name="group1" class="with-gap">
+                                            <span>Yes</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-chills-no" name="group1" class="with-gap">
+                                            <span>No</span>
+                                        </label>
+                                    </p>
+                                </form>
+                            </div>
+        
+                            <div>
+                                <form action="#">Cough
+                                    <p>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-cough-yes" name="group1" class="with-gap">
+                                            <span>Yes</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-cough-no" name="group1" class="with-gap">
+                                            <span>No</span>
+                                        </label>
+                                    </p>
+                                </form>
+                            </div>
+        
+                            <div>
+                                <form action="#">Shortness of Breath or Difficulty Breathing
+                                    <p>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-shortness-yes" name="group1" class="with-gap">
+                                            <span>Yes</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-shortness-no" name="group1" class="with-gap">
+                                            <span>No</span>
+                                        </label>
+                                    </p>
+                                </form>
+                            </div>
+        
+                            <div>
+                                <form action="#">Fatigue
+                                    <p>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-fatigue-yes" name="group1" class="with-gap">
+                                            <span>Yes</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-fatigue-no" name="group1" class="with-gap">
+                                            <span>No</span>
+                                        </label>
+                                    </p>
+                                </form>
+                            </div>
+        
+                            <div>
+                                <form action="#">Muscle or Body Aches
+                                    <p>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-aches-yes" name="group1" class="with-gap">
+                                            <span>Yes</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-aches-no" name="group1" class="with-gap">
+                                            <span>No</span>
+                                        </label>
+                                    </p>
+                                </form>
+                            </div>
+        
+                            <div>
+                                <form action="#">Headache
+                                    <p>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-headache-yes" name="group1" class="with-gap">
+                                            <span>Yes</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-headache-no" name="group1" class="with-gap">
+                                            <span>No</span>
+                                        </label>
+                                    </p>
+                                </form>
+                            </div>
+        
+                            <div>
+                                <form action="#">New Loss of Taste or Smell
+                                    <p>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-loss-yes" name="group1" class="with-gap">
+                                            <span>Yes</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-loss-no" name="group1" class="with-gap">
+                                            <span>No</span>
+                                        </label>
+                                    </p>
+                                </form>
+                            </div>
+        
+                            <div>
+                                <form action="#">Sore Throat
+                                    <p>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-throat-yes" name="group1" class="with-gap">
+                                            <span>Yes</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-throat-no" name="group1" class="with-gap">
+                                            <span>No</span>
+                                        </label>
+                                    </p>
+                                </form>
+                            </div>
+        
+                            <div>
+                                <form action="#">Congestion or Runny Nose
+                                    <p>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-congestion-yes" name="group1" class="with-gap">
+                                            <span>Yes</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-congestion-no" name="group1" class="with-gap">
+                                            <span>No</span>
+                                        </label>
+                                    </p>
+                                </form>
+                            </div>
+        
+                            <div>
+                                <form action="#">Nausea or Vommitting
+                                    <p>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-nausea-yes" name="group1" class="with-gap">
+                                            <span>Yes</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-nausea-no" name="group1" class="with-gap">
+                                            <span>No</span>
+                                        </label>
+                                    </p>
+                                </form>
+                            </div>
+        
+                            <div>
+                                <form action="#">Diarrhea
+                                    <p>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-diarrhea-yes" name="group1" class="with-gap">
+                                            <span>Yes</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" id="checkbox-radio-diarrhea-no" name="group1" class="with-gap">
+                                            <span>No</span>
+                                        </label>
+                                    </p>
+                                </form>
+                            </div>
+                            
+                            <div class="modal-footer">
+                            <button type="submit" class="pure-button pure-button-primary" id="save-btn">Save</button>
+                            </div>
                     </form>
-                </div>
+        
 
-                <div class="pure-control-group">
-                    <form class="pure-form">
-                    <label>Cough</label>
-                        <input type="radio" id="checkbox-radio-cough-yes" name="optionsRadios" value="Cough">Yes</label>
-                        <input type="radio" id="checkbox-radio-cough-no" name="optionsRadios" value="No Cough" /> No</label>
-                    </form>
-                </div>
-
-                <div class="pure-control-group">
-                    <form class="pure-form">
-                    <label>Shortness of Breath or Difficulty Breathing</label>
-                        <input type="radio" id="checkbox-radio-shortness-yes" name="optionsRadios" value="Shortness of Breath or Difficulty Breathing">Yes</label>
-                        <input type="radio" id="checkbox-radio-shortness-no" name="optionsRadios" value="No Shortness of Breath or Difficulty Breathing" /> No</label>
-                    </form>
-                </div>
-
-                <div class="pure-control-group">
-                    <form class="pure-form">
-                    <label>Fatigue</label>
-                        <input type="radio" id="checkbox-radio-fatigue-yes" name="optionsRadios" value="Fatigue">Yes</label>
-                        <input type="radio" id="checkbox-radio-fatigue-no" name="optionsRadios" value="No Fatigue" /> No</label>
-                    </form>
-                </div>
-
-                <div class="pure-control-group">
-                    <form class="pure-form">
-                    <label>Muscle or Body Aches</label>
-                        <input type="radio" id="checkbox-radio-aches-yes" name="optionsRadios" value="Muscle or Body Aches">Yes</label>
-                        <input type="radio" id="checkbox-radio-aches-no" name="optionsRadios" value="No Muscle or Body Aches" /> No</label>
-                    </form>
-                </div>
-
-                <div class="pure-control-group">
-                    <form class="pure-form">
-                    <label>Headache</label>
-                        <input type="radio" id="checkbox-radio-headache-yes" name="optionsRadios" value="Headache">Yes</label>
-                        <input type="radio" id="checkbox-radio-headache-no" name="optionsRadios" value="No Headache" /> No</label>
-                    </form>
-                </div>
-
-                <div class="pure-control-group">
-                    <form class="pure-form">
-                    <label>New Loss of Taste or Smell</label>
-                        <input type="radio" id="checkbox-radio-loss-yes" name="optionsRadios" value="New Loss of Taste or Smell">Yes</label>
-                        <input type="radio" id="checkbox-radio-loss-no" name="optionsRadios" value="No New Loss of Taste or Smell" /> No</label>
-                    </form>
-                </div>
-
-                <div class="pure-control-group">
-                    <form class="pure-form">
-                    <label>Sore Throat</label>
-                        <input type="radio" id="checkbox-radio-throat-yes" name="optionsRadios" value="Sore Throat">Yes</label>
-                        <input type="radio" id="checkbox-radio-throat-no" name="optionsRadios" value="No Sore Throat" /> No</label>
-                    </form>
-                </div>
-
-                <div class="pure-control-group">
-                    <form class="pure-form">
-                    <label>Congestion or Runny Nose</label>
-                        <input type="radio" id="checkbox-radio-congestion-yes" name="optionsRadios" value="Congestion or Runny Nose">Yes</label>
-                        <input type="radio" id="checkbox-radio-congestion-no" name="optionsRadios" value="No Congestion or Runny Nose" /> No</label>
-                    </form>
-                </div>
-
-                <div class="pure-control-group">
-                    <form class="pure-form">
-                    <label>Nausea or Vommiting</label>
-                        <input type="radio" id="checkbox-radio-nausea-yes" name="optionsRadios" value="Nausea or Vommiting">Yes</label>
-                        <input type="radio" id="checkbox-radio-nausea-no" name="optionsRadios" value="No Nausea or Vommiting" /> No</label>
-                    </form>
-                </div>
-
-                <div class="pure-control-group">
-                    <form class="pure-form">
-                    <label>Diarrhea</label>
-                        <input type="radio" id="checkbox-radio-diarrhea-yes" name="optionsRadios" value="Diarrhea">Yes</label>
-                        <input type="radio" id="checkbox-radio-diarrhea-no" name="optionsRadios" value="No Diarrhea" /> No</label>
-                    </form>
-                </div>
-                
-                <div class="pure-controls">
-                <button type="submit" class="pure-button pure-button-primary" id="save-btn">Save</button>
-                </div>
-
-                <div class="pure-controls pure-button pure-button-primary">
-                    <a href="./symptoms.html">
-                      View All Symptoms
-                    </a>
-                </div>
-
-            </fieldset>
-        </form>
+            <div class="pure-controls pure-button pure-button-primary">
+            <a href="./symptoms.html">
+              View All Symptoms
+            </a>
+        </div> 
     </div>
 
 
     <!-- city data -->
-    <div class="pure-u-1-3">
+    <div class="col s4">
     <h2>COVID-19 Data by State</h2>
     <form class="pure-form pure-form-stacked" id="form">
         <legend>Search for a State:</legend>
@@ -216,19 +294,26 @@
     </div>
 
     <!-- CDC recommendations-->
-    <div class="pure-u-1-3" id="map">
+    <div class="col s4" id="map">
     <h2>Latest CDC Recommendations</h2>
     </div>
 
 
-
-
 </div>
+
+
+
+
 
     <script defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCxW4k1Q_p3Q38ilsgAmmTpBKVxfkOM24&callback=initMap">
     </script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@ var clearButtonEl = document.querySelector("#clear-btn");
 var saveButtonEl = document.querySelector("#save-btn");
 var symptomsLogArray = [];
 
+
 var stateCodeIndex = ["AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC","DE", "FL", "GA", "GU",
 "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MP", "MS",
 "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC",
@@ -576,9 +577,6 @@ var saveSymptoms = function() {
     if (symptomList) {
         symptomsLogArray = symptomList;
     }
-    // else {
-    //   symptomsLogArray = [];
-    // };
 
   var symptomsArray = [];
   var symptomDate = document.getElementById("dateofsymptoms").value;
@@ -661,6 +659,40 @@ $(clearButtonEl).on("click", function(event) {
 
 // event listener for save symptoms button
 $(saveButtonEl).on("click", function(event) {
-  event.preventDefault();
+  // if no input for date, alert
+  var symptomDate = document.getElementById("dateofsymptoms").value;
+  var symptomTemp = document.getElementById("aligned-temp").value;
+if (!symptomDate) {
+  alert("Please enter the date.")
+}
+else if (!symptomTemp) {
+  alert("Please enter your temperature.");
+}
+else if (symptomTemp > 110 || symptomTemp < 95) {
+  alert("Please enter a temperature between 95-110 (°F)");
+}
+else if(
+  !$("#checkbox-radio-chills-yes").is(':checked') && !$("#checkbox-radio-chills-no").is(':checked') ||
+  !$("#checkbox-radio-cough-yes").is(':checked') && !$("#checkbox-radio-cough-no").is(':checked') ||
+  !$("#checkbox-radio-shortness-yes").is(':checked') && !$("#checkbox-radio-shortness-no").is(':checked') ||
+  !$("#checkbox-radio-fatigue-yes").is(':checked') && !$("#checkbox-radio-fatigue-no").is(':checked') ||
+  !$("#checkbox-radio-aches-yes").is(':checked') && !$("#checkbox-radio-aches-no").is(':checked') ||
+  !$("#checkbox-radio-headache-yes").is(':checked') && !$("#checkbox-radio-headache-no").is(':checked') ||
+  !$("#checkbox-radio-loss-yes").is(':checked') && !$("#checkbox-radio-loss-no").is(':checked') ||
+  !$("#checkbox-radio-throat-yes").is(':checked') && !$("#checkbox-radio-throat-no").is(':checked') ||
+  !$("#checkbox-radio-congestion-yes").is(':checked') && !$("#checkbox-radio-congestion-no").is(':checked') ||
+  !$("#checkbox-radio-nausea-yes").is(':checked') && !$("#checkbox-radio-nausea-no").is(':checked') ||
+  !$("#checkbox-radio-diarrhea-yes").is(':checked') && !$("#checkbox-radio-diarrhea-no").is(':checked')
+  ) {
+  alert("Please provide Yes/No response to each symptom.");
+}
+else {
   saveSymptoms();
+};
 })
+
+$("#dateofsymptoms").datepicker({
+  maxDate: 0
+});
+
+
