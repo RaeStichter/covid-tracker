@@ -635,3 +635,5 @@ else {
 $("#dateofsymptoms").datepicker({
   maxDate: 0
 });
+
+
