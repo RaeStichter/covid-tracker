@@ -6,67 +6,17 @@ const input = document.getElementById("stacked-state");
 const apiDataEl = document.getElementById("api-data-display");
 var searchedStatesArray = [];
 var searchedStatesEl = document.querySelector("#searched-states");
+var clearButtonEl = document.querySelector("#clear-btn");
+var saveButtonEl = document.querySelector("#save-btn");
+var symptomsLogArray = [];
 
 var clearButtonEl = document.querySelector("#clear-btn");
 
-var stateCodeIndex = [
-  "AK",
-  "AL",
-  "AR",
-  "AS",
-  "AZ",
-  "CA",
-  "CO",
-  "CT",
-  "DC",
-  "DE",
-  "FL",
-  "GA",
-  "GU",
-  "HI",
-  "IA",
-  "ID",
-  "IL",
-  "IN",
-  "KS",
-  "KY",
-  "LA",
-  "MA",
-  "MD",
-  "ME",
-  "MI",
-  "MN",
-  "MO",
-  "MP",
-  "MS",
-  "MT",
-  "NC",
-  "ND",
-  "NE",
-  "NH",
-  "NJ",
-  "NM",
-  "NV",
-  "NY",
-  "OH",
-  "OK",
-  "OR",
-  "PA",
-  "PR",
-  "RI",
-  "SC",
-  "SD",
-  "TN",
-  "TX",
-  "UT",
-  "VA",
-  "VI",
-  "VT",
-  "WA",
-  "WI",
-  "WV",
-  "WY",
-];
+var stateCodeIndex = ["AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC","DE", "FL", "GA", "GU",
+"HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MP", "MS",
+"MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC",
+"SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
+
 
 const latLngStates = [
   {
@@ -85,9 +35,15 @@ const latLngStates = [
     longitude: -92.3809,
   },
   {
-    state: "Arizona",
-    latitude: 33.7712,
-    longitude: -111.3877,
+
+    "state":"AmericanSamoa",
+    "latitude":14.2710,
+    "longitude":170.1322
+  },
+  {
+    "state":"Arizona",
+    "latitude":33.7712,
+    "longitude":-111.3877
   },
   {
     state: "California",
@@ -105,9 +61,14 @@ const latLngStates = [
     longitude: -72.7622,
   },
   {
-    state: "Delaware",
-    latitude: 39.3498,
-    longitude: -75.5148,
+    "state":"DC",
+    "latitude":38.9072,
+    "longitude":-77.0081
+  },
+  {
+    "state":"Delaware",
+    "latitude":39.3498,
+    "longitude":-75.5148
   },
   {
     state: "Florida",
@@ -120,9 +81,14 @@ const latLngStates = [
     longitude: -83.6487,
   },
   {
-    state: "Hawaii",
-    latitude: 21.1098,
-    longitude: -157.5311,
+    "state":"Guam",
+    "latitude":13.4443,
+    "longitude":144.7606
+  },
+  {
+    "state":"Hawaii",
+    "latitude":21.1098,
+    "longitude":-157.5311
   },
   {
     state: "Iowa",
@@ -190,9 +156,14 @@ const latLngStates = [
     longitude: -92.302,
   },
   {
-    state: "Mississippi",
-    latitude: 32.7673,
-    longitude: -89.6812,
+    "state":"MarianaIslands",
+    "latitude":15.1806286,
+    "longitude":145.7291657
+  },
+  {
+    "state":"Mississippi",
+    "latitude":32.7673,
+    "longitude":-89.6812
   },
   {
     state: "Montana",
@@ -260,9 +231,14 @@ const latLngStates = [
     longitude: -77.264,
   },
   {
-    state: "Rhode Island",
-    latitude: 41.6772,
-    longitude: -71.5101,
+    "state":"PuertoRico",
+    "latitude":18.2438738,
+    "longitude":-66.4992349
+  },
+  {
+    "state":"Rhode Island",
+    "latitude":41.6772,
+    "longitude":-71.5101
   },
   {
     state: "South Carolina",
@@ -295,9 +271,14 @@ const latLngStates = [
     longitude: -78.2057,
   },
   {
-    state: "Vermont",
-    latitude: 44.0407,
-    longitude: -72.7093,
+    "state":"VirginIslands",
+    "latitude":18.0483293,
+    "longitude":-64.8076474
+  },
+  {
+    "state":"Vermont",
+    "latitude":44.0407,
+    "longitude":-72.7093
   },
   {
     state: "Washington",
@@ -325,7 +306,7 @@ let map;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 3,
+    zoom: 3.6,
     center: { lat: 39.829169, lng: -98.579908 }, //39.82916983397753, -98.57990885339983 geographic center of USA
     mapTypeId: "roadmap",
   });
@@ -341,7 +322,7 @@ function initMap() {
 
 // Loop through the results array and place a marker for each
 // set of coordinates.
-const eqfeed_callback = function (latLngStates) {
+const eqfeed_callback = function (latLngStates, data, stateIndex) {
   for (let i = 0; i < latLngStates.length; i++) {
     const lat = latLngStates[i].latitude;
     const lng = latLngStates[i].longitude;
@@ -349,6 +330,15 @@ const eqfeed_callback = function (latLngStates) {
     const latLng = new google.maps.LatLng(lat, lng);
     new google.maps.Marker({
       position: latLng,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: "red",
+        fillOpacity: 0.2,
+        scale: 10,
+        //scale: Math.pow(2, magnitude) / 2,
+        strokeColor: "white",
+        strokeWeight: 0.5
+      },
       map: map,
     });
   }
@@ -390,6 +380,8 @@ var getStateData = function (stateSearch) {
           console.log(info);
           console.log(data);
           displayData(stateIndex, data);
+          getMagnitude(data);
+          //eqfeed_callback(latLngStates, data, stateIndex);
         });
       });
       // displayData(stateSearch, data);
@@ -398,7 +390,28 @@ var getStateData = function (stateSearch) {
   });
 };
 
-var displayData = function (stateIndex, data) {
+var getMagnitude = function(data) {
+
+  var stateMagnitude = [];
+
+  for (i = 0; i < data.length; i++) {
+    var positive = data[i].positive;
+    stateMagnitude[i] = parseInt(positive);
+    //console.log(stateMagnitude);
+  }
+  
+  console.log(stateMagnitude);
+  //console.log(Math.max(stateMagnitude));
+  
+  
+  
+};
+
+
+var displayData = function(stateIndex, data) {
+
+  apiDataEl.textContent = "";
+
   console.log(stateIndex, data);
 
   // ------------ Variables for all of the state information
@@ -526,7 +539,89 @@ var clearStates = function () {
   localStorage.removeItem("states");
   searchedStatesArray = [];
   searchedStatesEl.textContent = "";
+
 };
+
+
+
+
+// function to save symptoms to local storage
+var saveSymptoms = function() {
+  var symptomList = JSON.parse(localStorage.getItem("symptoms"));
+    if (symptomList) {
+        symptomsLogArray = symptomList;
+    }
+
+  var symptomsArray = [];
+  var symptomDate = document.getElementById("dateofsymptoms").value;
+  symptomsArray.push(symptomDate);
+  var symptomTemp = document.getElementById("aligned-temp").value;
+  symptomsArray.push(symptomTemp);
+
+  
+  if($("#checkbox-radio-chills-yes").is(':checked')) {
+    symptomsArray.push("Chills");
+  }
+  else {};
+
+      if($("#checkbox-radio-cough-yes").is(':checked')) {
+    symptomsArray.push("Cough");
+  }
+  else {};
+
+  if($("#checkbox-radio-shortness-yes").is(':checked')) {
+    symptomsArray.push("Shortness of Breath or Difficulty Breathing");
+  }
+  else {};
+
+  if($("#checkbox-radio-fatigue-yes").is(':checked')) {
+    symptomsArray.push("Fatigue");
+  }
+  else {};
+
+  if($("#checkbox-radio-aches-yes").is(':checked')) {
+    symptomsArray.push("Muscle or Body Aches");
+  }
+  else {};
+
+  if($("#checkbox-radio-headache-yes").is(':checked')) {
+    symptomsArray.push("Headache");
+  }
+  else {};
+
+  if($("#checkbox-radio-loss-yes").is(':checked')) {
+    symptomsArray.push("New Loss of Taste or Smell");
+  }
+  else {};
+
+  if($("#checkbox-radio-throat-yes").is(':checked')) {
+    symptomsArray.push("Sore Throat");
+  }
+  else {};
+
+  if($("#checkbox-radio-congestion-yes").is(':checked')) {
+    symptomsArray.push("Congestion or Runny Nose");
+  }
+  else {};
+
+  if($("#checkbox-radio-nausea-yes").is(':checked')) {
+    symptomsArray.push("Nausea or Vommiting");
+  }
+  else {};
+
+  if($("#checkbox-radio-diarrhea-yes").is(':checked')) {
+    symptomsArray.push("Diarrhea");
+  }
+  else {};
+ 
+  symptomsLogArray.push(symptomsArray);
+  console.log(symptomsArray);
+  console.log(symptomsLogArray);
+
+  // save symptoms to local storage
+  localStorage.setItem("symptoms", JSON.stringify(symptomsLogArray));  
+};
+
 
 form.addEventListener("submit", formSubmitHandler);
 
@@ -535,6 +630,7 @@ form.addEventListener("submit", formSubmitHandler);
 $(clearButtonEl).on("click", function (event) {
   event.preventDefault();
   clearStates();
+
 });
 
 // event listener for collapsible symptoms list
@@ -552,3 +648,46 @@ for (i = 0; i < coll.length; i++) {
     }
   });
 }
+
+})
+
+// event listener for save symptoms button
+$(saveButtonEl).on("click", function(event) {
+  // if no input for date, alert
+  var symptomDate = document.getElementById("dateofsymptoms").value;
+  var symptomTemp = document.getElementById("aligned-temp").value;
+if (!symptomDate) {
+  alert("Please enter the date.")
+}
+else if (!symptomTemp) {
+  alert("Please enter your temperature.");
+}
+else if (symptomTemp > 110 || symptomTemp < 95) {
+  alert("Please enter a temperature between 95-110 (°F)");
+}
+else if(
+  !$("#checkbox-radio-chills-yes").is(':checked') && !$("#checkbox-radio-chills-no").is(':checked') ||
+  !$("#checkbox-radio-cough-yes").is(':checked') && !$("#checkbox-radio-cough-no").is(':checked') ||
+  !$("#checkbox-radio-shortness-yes").is(':checked') && !$("#checkbox-radio-shortness-no").is(':checked') ||
+  !$("#checkbox-radio-fatigue-yes").is(':checked') && !$("#checkbox-radio-fatigue-no").is(':checked') ||
+  !$("#checkbox-radio-aches-yes").is(':checked') && !$("#checkbox-radio-aches-no").is(':checked') ||
+  !$("#checkbox-radio-headache-yes").is(':checked') && !$("#checkbox-radio-headache-no").is(':checked') ||
+  !$("#checkbox-radio-loss-yes").is(':checked') && !$("#checkbox-radio-loss-no").is(':checked') ||
+  !$("#checkbox-radio-throat-yes").is(':checked') && !$("#checkbox-radio-throat-no").is(':checked') ||
+  !$("#checkbox-radio-congestion-yes").is(':checked') && !$("#checkbox-radio-congestion-no").is(':checked') ||
+  !$("#checkbox-radio-nausea-yes").is(':checked') && !$("#checkbox-radio-nausea-no").is(':checked') ||
+  !$("#checkbox-radio-diarrhea-yes").is(':checked') && !$("#checkbox-radio-diarrhea-no").is(':checked')
+  ) {
+  alert("Please provide Yes/No response to each symptom.");
+}
+else {
+  saveSymptoms();
+};
+})
+
+$("#dateofsymptoms").datepicker({
+  maxDate: 0
+});
+
+
+
