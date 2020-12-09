@@ -1,21 +1,26 @@
-ul {
+/* ul {
   list-style-type: none;
-}
+} */
 
 /* Style footer */
-body {
+/* body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-}
+} */
 
 /* main {
   flex: 1 0 auto;
 } */
 
-a {
-  /* flex: 1 0 auto; */
-  /* display: flex;
+/* Add flex to the page */
+/* a {
+  flex: 1 0 auto;
+  display: flex;
   min-height: 100vh;
-  flex-direction: column; */
-}
+  flex-direction: column;
+} */
+
+/* .pure-form .pure-form-aligned {
+  color: rgb(233, 122, 122);
+} */
