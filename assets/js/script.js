@@ -10,29 +10,32 @@ var clearButtonEl = document.querySelector("#clear-btn");
 var saveButtonEl = document.querySelector("#save-btn");
 var symptomsLogArray = [];
 
+var clearButtonEl = document.querySelector("#clear-btn");
 
 var stateCodeIndex = ["AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC","DE", "FL", "GA", "GU",
 "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MP", "MS",
 "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC",
 "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
 
+
 const latLngStates = [
   {
-    "state":"Alaska",
-    "latitude":61.3850,
-    "longitude":-152.2683
+    state: "Alaska",
+    latitude: 61.385,
+    longitude: -152.2683,
   },
   {
-    "state":"Alabama",
-    "latitude":32.7990,
-    "longitude":-86.8073
+    state: "Alabama",
+    latitude: 32.799,
+    longitude: -86.8073,
   },
   {
-    "state":"Arkansas",
-    "latitude":34.9513,
-    "longitude":-92.3809
+    state: "Arkansas",
+    latitude: 34.9513,
+    longitude: -92.3809,
   },
   {
+
     "state":"AmericanSamoa",
     "latitude":14.2710,
     "longitude":170.1322
@@ -43,19 +46,19 @@ const latLngStates = [
     "longitude":-111.3877
   },
   {
-    "state":"California",
-    "latitude":36.1700,
-    "longitude":-119.7462
+    state: "California",
+    latitude: 36.17,
+    longitude: -119.7462,
   },
   {
-    "state":"Colorado",
-    "latitude":39.0646,
-    "longitude":-105.3272
+    state: "Colorado",
+    latitude: 39.0646,
+    longitude: -105.3272,
   },
   {
-    "state":"Connecticut",
-    "latitude":41.5834,
-    "longitude":-72.7622
+    state: "Connecticut",
+    latitude: 41.5834,
+    longitude: -72.7622,
   },
   {
     "state":"DC",
@@ -68,14 +71,14 @@ const latLngStates = [
     "longitude":-75.5148
   },
   {
-    "state":"Florida",
-    "latitude":27.8333,
-    "longitude":-81.7170
+    state: "Florida",
+    latitude: 27.8333,
+    longitude: -81.717,
   },
   {
-    "state":"Georgia",
-    "latitude":32.9866,
-    "longitude":-83.6487
+    state: "Georgia",
+    latitude: 32.9866,
+    longitude: -83.6487,
   },
   {
     "state":"Guam",
@@ -88,69 +91,69 @@ const latLngStates = [
     "longitude":-157.5311
   },
   {
-    "state":"Iowa",
-    "latitude":42.0046,
-    "longitude":-93.2140
+    state: "Iowa",
+    latitude: 42.0046,
+    longitude: -93.214,
   },
   {
-    "state":"Idaho",
-    "latitude":44.2394,
-    "longitude":-114.5103
+    state: "Idaho",
+    latitude: 44.2394,
+    longitude: -114.5103,
   },
   {
-    "state":"Illinois",
-    "latitude":40.3363,
-    "longitude":-89.0022
+    state: "Illinois",
+    latitude: 40.3363,
+    longitude: -89.0022,
   },
   {
-    "state":"Indiana",
-    "latitude":39.8647,
-    "longitude":-86.2604
+    state: "Indiana",
+    latitude: 39.8647,
+    longitude: -86.2604,
   },
   {
-    "state":"Kansas",
-    "latitude":38.5111,
-    "longitude":-96.8005
+    state: "Kansas",
+    latitude: 38.5111,
+    longitude: -96.8005,
   },
   {
-    "state":"Kentucky",
-    "latitude":37.6690,
-    "longitude":-84.6514
+    state: "Kentucky",
+    latitude: 37.669,
+    longitude: -84.6514,
   },
   {
-    "state":"Louisiana",
-    "latitude":31.1801,
-    "longitude":-91.8749
+    state: "Louisiana",
+    latitude: 31.1801,
+    longitude: -91.8749,
   },
   {
-    "state":"Massachusetts",
-    "latitude":42.2373,
-    "longitude":-71.5314
+    state: "Massachusetts",
+    latitude: 42.2373,
+    longitude: -71.5314,
   },
   {
-    "state":"Maryland",
-    "latitude":39.0724,
-    "longitude":-76.7902
+    state: "Maryland",
+    latitude: 39.0724,
+    longitude: -76.7902,
   },
   {
-    "state":"Maine",
-    "latitude":44.6074,
-    "longitude":-69.3977
+    state: "Maine",
+    latitude: 44.6074,
+    longitude: -69.3977,
   },
   {
-    "state":"Michigan",
-    "latitude":43.3504,
-    "longitude":-84.5603
+    state: "Michigan",
+    latitude: 43.3504,
+    longitude: -84.5603,
   },
   {
-    "state":"Minnesota",
-    "latitude":45.7326,
-    "longitude":-93.9196
+    state: "Minnesota",
+    latitude: 45.7326,
+    longitude: -93.9196,
   },
   {
-    "state":"Missouri",
-    "latitude":38.4623,
-    "longitude":-92.3020
+    state: "Missouri",
+    latitude: 38.4623,
+    longitude: -92.302,
   },
   {
     "state":"MarianaIslands",
@@ -163,69 +166,69 @@ const latLngStates = [
     "longitude":-89.6812
   },
   {
-    "state":"Montana",
-    "latitude":46.9048,
-    "longitude":-110.3261
+    state: "Montana",
+    latitude: 46.9048,
+    longitude: -110.3261,
   },
   {
-    "state":"North Carolina",
-    "latitude":35.6411,
-    "longitude":-79.8431
+    state: "North Carolina",
+    latitude: 35.6411,
+    longitude: -79.8431,
   },
   {
-    "state":"North Dakota",
-    "latitude":47.5362,
-    "longitude":-99.7930
+    state: "North Dakota",
+    latitude: 47.5362,
+    longitude: -99.793,
   },
   {
-    "state":"Nebraska",
-    "latitude":41.1289,
-    "longitude":-98.2883
+    state: "Nebraska",
+    latitude: 41.1289,
+    longitude: -98.2883,
   },
   {
-    "state":"New Hampshire",
-    "latitude":43.4108,
-    "longitude":-71.5653
+    state: "New Hampshire",
+    latitude: 43.4108,
+    longitude: -71.5653,
   },
   {
-    "state":"New Jersey",
-    "latitude":40.3140,
-    "longitude":-74.5089
+    state: "New Jersey",
+    latitude: 40.314,
+    longitude: -74.5089,
   },
   {
-    "state":"New Mexico",
-    "latitude":34.8375,
-    "longitude":-106.2371
+    state: "New Mexico",
+    latitude: 34.8375,
+    longitude: -106.2371,
   },
   {
-    "state":"Nevada",
-    "latitude":38.4199,
-    "longitude":-117.1219
+    state: "Nevada",
+    latitude: 38.4199,
+    longitude: -117.1219,
   },
   {
-    "state":"New York",
-    "latitude":42.1497,
-    "longitude":-74.9384
+    state: "New York",
+    latitude: 42.1497,
+    longitude: -74.9384,
   },
   {
-    "state":"Ohio",
-    "latitude":40.3736,
-    "longitude":-82.7755
+    state: "Ohio",
+    latitude: 40.3736,
+    longitude: -82.7755,
   },
   {
-    "state":"Oklahoma",
-    "latitude":35.5376,
-    "longitude":-96.9247
+    state: "Oklahoma",
+    latitude: 35.5376,
+    longitude: -96.9247,
   },
   {
-    "state":"Oregon",
-    "latitude":44.5672,
-    "longitude":-122.1269
+    state: "Oregon",
+    latitude: 44.5672,
+    longitude: -122.1269,
   },
   {
-    "state":"Pennsylvania",
-    "latitude":40.5773,
-    "longitude":-77.2640
+    state: "Pennsylvania",
+    latitude: 40.5773,
+    longitude: -77.264,
   },
   {
     "state":"PuertoRico",
@@ -238,34 +241,34 @@ const latLngStates = [
     "longitude":-71.5101
   },
   {
-    "state":"South Carolina",
-    "latitude":33.8191,
-    "longitude":-80.9066
+    state: "South Carolina",
+    latitude: 33.8191,
+    longitude: -80.9066,
   },
   {
-    "state":"South Dakota",
-    "latitude":44.2853,
-    "longitude":-99.4632
+    state: "South Dakota",
+    latitude: 44.2853,
+    longitude: -99.4632,
   },
   {
-    "state":"Tennessee",
-    "latitude":35.7449,
-    "longitude":-86.7489
+    state: "Tennessee",
+    latitude: 35.7449,
+    longitude: -86.7489,
   },
   {
-    "state":"Texas",
-    "latitude":31.1060,
-    "longitude":-97.6475
+    state: "Texas",
+    latitude: 31.106,
+    longitude: -97.6475,
   },
   {
-    "state":"Utah",
-    "latitude":40.1135,
-    "longitude":-111.8535
+    state: "Utah",
+    latitude: 40.1135,
+    longitude: -111.8535,
   },
   {
-    "state":"Virginia",
-    "latitude":37.7680,
-    "longitude":-78.2057
+    state: "Virginia",
+    latitude: 37.768,
+    longitude: -78.2057,
   },
   {
     "state":"VirginIslands",
@@ -278,26 +281,25 @@ const latLngStates = [
     "longitude":-72.7093
   },
   {
-    "state":"Washington",
-    "latitude":47.3917,
-    "longitude":-121.5708
+    state: "Washington",
+    latitude: 47.3917,
+    longitude: -121.5708,
   },
   {
-    "state":"Wisconsin",
-    "latitude":44.2563,
-    "longitude":-89.6385
+    state: "Wisconsin",
+    latitude: 44.2563,
+    longitude: -89.6385,
   },
   {
-    "state":"West Virginia",
-    "latitude":38.4680,
-    "longitude":-80.9696
+    state: "West Virginia",
+    latitude: 38.468,
+    longitude: -80.9696,
   },
   {
-    "state":"Wyoming",
-    "latitude":42.7475,
-    "longitude":-107.2085
-  }
-
+    state: "Wyoming",
+    latitude: 42.7475,
+    longitude: -107.2085,
+  },
 ];
 
 let map;
@@ -342,11 +344,7 @@ const eqfeed_callback = function (latLngStates, data, stateIndex) {
   }
 };
 
-
-const latLngCall = function(stateCodeIndex) {
-
-}
-
+const latLngCall = function (stateCodeIndex) {};
 
 // Create an li element
 const liMaker = (text) => {
@@ -365,10 +363,7 @@ const liMaker = (text) => {
 
 // --------------------------------------------------RS Added ------------------------------------------------
 
-
-
-var getStateData = function(stateSearch) {
-
+var getStateData = function (stateSearch) {
   console.log("get state data was called, this is where APIS will be called.");
 
   // get index of state to be used in DisplayData
@@ -377,13 +372,11 @@ var getStateData = function(stateSearch) {
 
   var apiOpenCovid = "https://api.covidtracking.com/v1/states/current.json";
 
-
-  fetch(apiOpenCovid).then(function(response) {
-    response.json().then(function(data) {
+  fetch(apiOpenCovid).then(function (response) {
+    response.json().then(function (data) {
       var apiCovid = "https://api.covid19api.com/summary";
-      fetch(apiCovid).then(function(response) {
-        response.json().then(function(info) {
-
+      fetch(apiCovid).then(function (response) {
+        response.json().then(function (info) {
           console.log(info);
           console.log(data);
           displayData(stateIndex, data);
@@ -395,8 +388,6 @@ var getStateData = function(stateSearch) {
       // console.log(data);
     });
   });
-
-
 };
 
 var getMagnitude = function(data) {
@@ -428,37 +419,36 @@ var displayData = function(stateIndex, data) {
     {
       stat: "State: ",
 
-      data: data[stateIndex].state
+      data: data[stateIndex].state,
     },
     {
       stat: "Probable Cases: ",
-      data: data[stateIndex].probableCases
+      data: data[stateIndex].probableCases,
     },
     {
       stat: "Positive Cases: ",
-      data: data[stateIndex].positive
+      data: data[stateIndex].positive,
     },
     {
       stat: "Hospitalized Currently: ",
-      data: data[stateIndex].hospitalizedCurrently
+      data: data[stateIndex].hospitalizedCurrently,
     },
     {
       stat: "Deaths: ",
-      data: data[stateIndex].death
+      data: data[stateIndex].death,
     },
     {
       stat: "Negative Cases: ",
-      data: data[stateIndex].negative
+      data: data[stateIndex].negative,
     },
     {
       stat: "Recovered Cases: ",
-      data: data[stateIndex].recovered
+      data: data[stateIndex].recovered,
     },
     {
       stat: "Total Cases: ",
-      data: data[stateIndex].total
-    }
-
+      data: data[stateIndex].total,
+    },
   ];
   // var state = data[stateIndex].state;
   // var positiveCases = data[stateIndex].positive;
@@ -469,24 +459,17 @@ var displayData = function(stateIndex, data) {
   // var probableCases = data[stateIndex].probableCases;
   // var recoveredCases = data[stateIndex].recovered;
 
-  
   console.log(stateInfo);
-  
-  
+
   //console.log(state, positiveCases, deaths,hospitalCurrent, caseTotal, negativeTest, probableCases, recoveredCases);
-  
 
   // create a container for the state data
   var stateData = document.createElement("div");
 
-
-
   // loop through the API data contained in stateInfo
   for (i = 0; i < stateInfo.length; i++) {
-   
     // create a span element to hold the data
     var stateNameEl = document.createElement("div");
-    
 
     stateNameEl.textContent = stateInfo[i].stat + stateInfo[i].data;
     //console.log(stateNameEl);
@@ -495,15 +478,8 @@ var displayData = function(stateIndex, data) {
     stateData.appendChild(stateNameEl);
   }
 
-
-  
-
-
   // create a span element for the total positive cases
   //var positiveCasesEl = document.createElement("span");
-
-
-
 
   // append conatiner to DOM
   apiDataEl.appendChild(stateData);
@@ -511,21 +487,19 @@ var displayData = function(stateIndex, data) {
 
 // function to display list of searched states from local storage
 
-var printStateList = function() {
-    var stateList = JSON.parse(localStorage.getItem("states"));
-    if (stateList) {
-        searchedStatesArray = stateList;
-    }
-    searchedStatesEl.textContent = "";
-    for (i = 0; i < searchedStatesArray.length; i++) {
-        var searchedState = $("<li>").text(searchedStatesArray[i]);
-        $(searchedStatesEl).append(searchedState);
-    }; 
-}
+var printStateList = function () {
+  var stateList = JSON.parse(localStorage.getItem("states"));
+  if (stateList) {
+    searchedStatesArray = stateList;
+  }
+  searchedStatesEl.textContent = "";
+  for (i = 0; i < searchedStatesArray.length; i++) {
+    var searchedState = $("<li>").text(searchedStatesArray[i]);
+    $(searchedStatesEl).append(searchedState);
+  }
+};
 
-
-var formSubmitHandler = function(event) {
-
+var formSubmitHandler = function (event) {
   event.preventDefault(); // prevents default action of browser, we then can specify what to do
   console.log("function was called");
 
@@ -534,28 +508,25 @@ var formSubmitHandler = function(event) {
   // save to local storage
   var stateList = JSON.parse(localStorage.getItem("states"));
 
-    if (stateList) {
-        searchedStatesArray = stateList;
-        if (searchedStatesArray.includes(stateSearch)) {
-        }
-        else {
-            searchedStatesArray.push(stateSearch);
-        localStorage.setItem("states", JSON.stringify(searchedStatesArray));
-        };
+  if (stateList) {
+    searchedStatesArray = stateList;
+    if (searchedStatesArray.includes(stateSearch)) {
+    } else {
+      searchedStatesArray.push(stateSearch);
+      localStorage.setItem("states", JSON.stringify(searchedStatesArray));
     }
-    else {
-        searchedStatesArray.push(stateSearch);
-        localStorage.setItem("states", JSON.stringify(searchedStatesArray)); 
-    };
-    printStateList();
+  } else {
+    searchedStatesArray.push(stateSearch);
+    localStorage.setItem("states", JSON.stringify(searchedStatesArray));
+  }
+  printStateList();
 
   // error handling and function pass through
-  if (stateSearch) { // if a value is entered, continue
+  if (stateSearch) {
+    // if a value is entered, continue
     getStateData(stateSearch); //function for API call here
     input.value = ""; // clears the field for the next search
-  }
-  else {
-
+  } else {
     alert("Please enter a State."); // this will eventually need to be a modal
   }
 };
@@ -569,7 +540,10 @@ var clearStates = function () {
   searchedStatesArray = [];
   searchedStatesEl.textContent = "";
 
-}
+};
+
+
+
 
 // function to save symptoms to local storage
 var saveSymptoms = function() {
@@ -646,15 +620,35 @@ var saveSymptoms = function() {
 
   // save symptoms to local storage
   localStorage.setItem("symptoms", JSON.stringify(symptomsLogArray));  
-}
+};
+
 
 form.addEventListener("submit", formSubmitHandler);
 
 // event listener for clear all button
 
-$(clearButtonEl).on("click", function(event) {
+$(clearButtonEl).on("click", function (event) {
   event.preventDefault();
   clearStates();
+
+});
+
+// event listener for collapsible symptoms list
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function () {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
 })
 
 // event listener for save symptoms button
@@ -694,5 +688,6 @@ else {
 $("#dateofsymptoms").datepicker({
   maxDate: 0
 });
+
 
 
