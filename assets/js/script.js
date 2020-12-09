@@ -9,7 +9,6 @@ var searchedStatesEl = document.querySelector("#searched-states");
 var clearButtonEl = document.querySelector("#clear-btn");
 var saveButtonEl = document.querySelector("#save-btn");
 var symptomsLogArray = [];
-
 var clearButtonEl = document.querySelector("#clear-btn");
 
 var stateCodeIndex = ["AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC","DE", "FL", "GA", "GU",
@@ -649,8 +648,6 @@ for (i = 0; i < coll.length; i++) {
   });
 }
 
-})
-
 // event listener for save symptoms button
 $(saveButtonEl).on("click", function(event) {
   // if no input for date, alert
@@ -688,6 +685,8 @@ else {
 $("#dateofsymptoms").datepicker({
   maxDate: 0
 });
+
+
 
 
 
