@@ -32,6 +32,11 @@ const latLngStates = [
     "longitude":-92.3809
   },
   {
+    "state":"AmericanSamoa",
+    "latitude":14.2710,
+    "longitude":170.1322
+  },
+  {
     "state":"Arizona",
     "latitude":33.7712,
     "longitude":-111.3877
@@ -52,6 +57,11 @@ const latLngStates = [
     "longitude":-72.7622
   },
   {
+    "state":"DC",
+    "latitude":38.9072,
+    "longitude":-77.0081
+  },
+  {
     "state":"Delaware",
     "latitude":39.3498,
     "longitude":-75.5148
@@ -65,6 +75,11 @@ const latLngStates = [
     "state":"Georgia",
     "latitude":32.9866,
     "longitude":-83.6487
+  },
+  {
+    "state":"Guam",
+    "latitude":13.4443,
+    "longitude":144.7606
   },
   {
     "state":"Hawaii",
@@ -137,6 +152,11 @@ const latLngStates = [
     "longitude":-92.3020
   },
   {
+    "state":"MarianaIslands",
+    "latitude":15.1806286,
+    "longitude":145.7291657
+  },
+  {
     "state":"Mississippi",
     "latitude":32.7673,
     "longitude":-89.6812
@@ -207,6 +227,11 @@ const latLngStates = [
     "longitude":-77.2640
   },
   {
+    "state":"PuertoRico",
+    "latitude":18.2438738,
+    "longitude":-66.4992349
+  },
+  {
     "state":"Rhode Island",
     "latitude":41.6772,
     "longitude":-71.5101
@@ -242,6 +267,11 @@ const latLngStates = [
     "longitude":-78.2057
   },
   {
+    "state":"VirginIslands",
+    "latitude":18.0483293,
+    "longitude":-64.8076474
+  },
+  {
     "state":"Vermont",
     "latitude":44.0407,
     "longitude":-72.7093
@@ -273,7 +303,7 @@ let map;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 3,
+    zoom: 3.6,
     center: { lat: 39.829169, lng: -98.579908 }, //39.82916983397753, -98.57990885339983 geographic center of USA
     mapTypeId: "roadmap",
   });
@@ -289,7 +319,7 @@ function initMap() {
 
 // Loop through the results array and place a marker for each
 // set of coordinates.
-const eqfeed_callback = function (latLngStates) {
+const eqfeed_callback = function (latLngStates, data, stateIndex) {
   for (let i = 0; i < latLngStates.length; i++) {
     const lat = latLngStates[i].latitude;
     const lng = latLngStates[i].longitude;
@@ -297,6 +327,15 @@ const eqfeed_callback = function (latLngStates) {
     const latLng = new google.maps.LatLng(lat, lng);
     new google.maps.Marker({
       position: latLng,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: "red",
+        fillOpacity: 0.2,
+        scale: 10,
+        //scale: Math.pow(2, magnitude) / 2,
+        strokeColor: "white",
+        strokeWeight: 0.5
+      },
       map: map,
     });
   }
@@ -347,6 +386,8 @@ var getStateData = function(stateSearch) {
           console.log(info);
           console.log(data);
           displayData(stateIndex, data);
+          getMagnitude(data);
+          //eqfeed_callback(latLngStates, data, stateIndex);
         });
       });
       // displayData(stateSearch, data);
@@ -357,9 +398,27 @@ var getStateData = function(stateSearch) {
 
 };
 
+var getMagnitude = function(data) {
+
+  var stateMagnitude = [];
+
+  for (i = 0; i < data.length; i++) {
+    var positive = data[i].positive;
+    stateMagnitude[i] = parseInt(positive);
+    //console.log(stateMagnitude);
+  }
+  
+  console.log(stateMagnitude);
+  //console.log(Math.max(stateMagnitude));
+  
+  
+  
+};
 
 
 var displayData = function(stateIndex, data) {
+
+  apiDataEl.textContent = "";
 
   console.log(stateIndex, data);
 
