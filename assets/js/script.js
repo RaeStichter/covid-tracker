@@ -368,7 +368,7 @@ let map;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 3.6, 
+    zoom: 3.8, 
     center: { lat: 39.829169, lng: -98.579908 }, //39.82916983397753, -98.57990885339983 geographic center of USA
     mapTypeId: "roadmap",
   });
@@ -532,7 +532,7 @@ const zoomState = function(stateIndex, latLngStates) {
   var lat = latLngStates[stateIndex].latitude;
   var lng = latLngStates[stateIndex].longitude;
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 6,
+    zoom: 6.5,
     center: { lat: lat, lng: lng }, //39.82916983397753, -98.57990885339983 geographic center of USA
     mapTypeId: "roadmap",
   });
