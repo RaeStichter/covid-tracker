@@ -11,10 +11,11 @@ var saveButtonEl = document.querySelector("#save-btn");
 var symptomsLogArray = [];
 var clearButtonEl = document.querySelector("#clear-btn");
 
-const maxMagnitude = 50;
-var apiOpenCovidData = [];
+const maxMagnitude = 50; // set base value for the magnitude markers on Google maps
+var apiOpenCovidData = []; // covid data called from the Open Covid Project API
+var magnitudes = []; // magnitudes of state data
 
-
+// Set the index of the states (array)
 var stateCodeIndex = [
   "AK",
   "AL",
@@ -74,6 +75,7 @@ var stateCodeIndex = [
   "WY",
 ];
 
+// Latitude and Longitude of all states (array)
 const latLngStates = [
   {
     state: "Alaska",
@@ -357,32 +359,95 @@ const latLngStates = [
   },
 ];
 
+// ----------------------------------------- Initialize Google Maps -----------------------------------------
+// loads map as the page loads
 let map;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 3.6,
+    zoom: 3.6, 
     center: { lat: 39.829169, lng: -98.579908 }, //39.82916983397753, -98.57990885339983 geographic center of USA
     mapTypeId: "roadmap",
   });
-  // Create a <script> tag and set the USGS URL as the source.
-  // const script = document.createElement("script");
-  // // This example uses a local copy of the GeoJSON stored at
-  // // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-  // script.src =
-  //   "https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js";
-  // document.getElementsByTagName("head")[0].appendChild(script);
-  eqfeed_callback(latLngStates);
+  // Call function to get API data from OPen Covid
+  getAPIData();
 }
 
-// Loop through the results array and place a marker for each
-// set of coordinates.
+// ----------------------------------------- Call API -----------------------------------------
+// Fetch the Open Covid Data from the API and store in a global function
+var getAPIData = function() {
+  
+  var apiOpenCovid = "https://api.covidtracking.com/v1/states/current.json";
+
+  fetch(apiOpenCovid).then(function (response) {
+  response.json().then(function (data) {
+    apiOpenCovidData = data;
+    console.log(apiOpenCovidData);
+    // var apiCovid = "https://api.covid19api.com/summary";
+    // fetch(apiCovid).then(function (response) {
+    //   response.json().then(function (info) {
+        
+    //     //console.log(info);
+    //    // console.log(data);
+    //    apiOpenCovidData = data;
+    //    console.log(apiOpenCovidData);
+    //    displayData(stateIndex, data);
+    //    getMagnitude(data);
+    //    zoomState(stateIndex, latLngStates);
+    //    //eqfeed_callback(latLngStates, data, stateIndex);
+    //   });
+    // });
+    // // displayData(stateSearch, data);
+    // // console.log(data);
+
+
+    // Call function to get magnitude for the data points for Google Maps
+    getMagnitude(apiOpenCovidData);
+  });
+});
+};
+
+// ----------------------------------------- Get Magnetude Function -----------------------------------------
+// Create value to send to call back function to display a magnitude for positive cases
+var getMagnitude = function(data) {
+  // Find the positive case values for covid for each state
+  var stateMagnitude = [];
+  for (i = 0; i < data.length; i++) {
+    var positive = data[i].positive;
+    stateMagnitude[i] = positive;
+  }
+
+  // Find the highest of the positive cases
+  var highestCovidPositive = Math.max.apply(null, stateMagnitude);
+  
+  // console.log(stateMagnitude);
+  // console.log(highestCovidPositive);
+  
+  // Loop through the positve cases and find a percentage of the max magnitude (to be used for display)
+  var stateMagnitudUpdates = [];
+  for (i = 0; i < stateMagnitude.length; i++) {
+    var mag = stateMagnitude[i];
+    // Current array value, divided by the highest value, multiplied by the max magnetude variable
+    stateMagnitudUpdates[i] = (mag / highestCovidPositive) * maxMagnitude;
+  };
+  //console.log(stateMagnitudUpdates);
+  // update gloabl variable 
+  magnitudes = stateMagnitudUpdates;
+  // Call the call back function to populate the map with the magnitudes
+  eqfeed_callback(latLngStates, stateMagnitudUpdates);
+};
+
+// ----------------------------------------- Populate Magnitude -----------------------------------------
+// Loop through the magnitude array and place a marker for each based on the coordinates for the state/territory
 const eqfeed_callback = function (latLngStates, stateMagnitudUpdates) {
   for (let i = 0; i < latLngStates.length; i++) {
+    // get latitude and longitude data from the array
     const lat = latLngStates[i].latitude;
     const lng = latLngStates[i].longitude;
     //console.log(lat, lng);
+    // locate on the map
     const latLng = new google.maps.LatLng(lat, lng);
+    // add markers (magnitude to the map)
     new google.maps.Marker({
       position: latLng,
       icon: {
@@ -390,7 +455,6 @@ const eqfeed_callback = function (latLngStates, stateMagnitudUpdates) {
         fillColor: "red",
         fillOpacity: 0.2,
         scale: stateMagnitudUpdates[i],
-        //scale: Math.pow(2, magnitude) / 2,
         strokeColor: "white",
         strokeWeight: 0.5
       },
@@ -399,14 +463,33 @@ const eqfeed_callback = function (latLngStates, stateMagnitudUpdates) {
   }
 };
 
-//const latLngCall = function (stateCodeIndex) {};
-
 const zoomState = function(stateIndex, latLngStates) {
+  var lat = latLngStates[stateIndex].latitude;
+  var lng = latLngStates[stateIndex].longitude;
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 6.5,
-    center: { lat: latLngStates[stateIndex].latitude, lng: latLngStates[stateIndex].longitude }, //39.82916983397753, -98.57990885339983 geographic center of USA
+    zoom: 6,
+    center: { lat: lat, lng: lng }, //39.82916983397753, -98.57990885339983 geographic center of USA
     mapTypeId: "roadmap",
   });
+
+  // locate on the map
+  const latLng = new google.maps.LatLng(lat, lng);
+  // add markers (magnitude to the map)
+  new google.maps.Marker({
+    position: latLng,
+    icon: {
+      path: google.maps.SymbolPath.CIRCLE,
+      fillColor: "red",
+      fillOpacity: 0.2,
+      scale: magnitudes[stateIndex],
+      strokeColor: "white",
+      strokeWeight: 0.5
+    },
+    map: map,
+  });
+  // // Call update magnitude function
+  // //)
+  // //eqfeed_callback(latLngStates, stateMagnitudUpdates);
 }
 
 
@@ -426,62 +509,70 @@ const liMaker = (text) => {
 //   input.value = "";
 // });
 
-// --------------------------------------------------RS Added ------------------------------------------------
+// ----------------------------------------- Get State Data -----------------------------------------
 
 var getStateData = function (stateSearch) {
   console.log("get state data was called, this is where APIS will be called.");
 
   // get index of state to be used in DisplayData
   var stateIndex = stateCodeIndex.indexOf(stateSearch);
-  console.log(stateIndex);
+  //console.log(stateIndex);
 
-  var apiOpenCovid = "https://api.covidtracking.com/v1/states/current.json";
+  // Call the function to display the state data in the DOM
+  displayData(stateIndex, apiOpenCovidData);
 
-  fetch(apiOpenCovid).then(function (response) {
-    response.json().then(function (data) {
-      var apiCovid = "https://api.covid19api.com/summary";
-      fetch(apiCovid).then(function (response) {
-        response.json().then(function (info) {
-          console.log(info);
-          console.log(data);
-          displayData(stateIndex, data);
-          getMagnitude(data);
-          zoomState(stateIndex, latLngStates);
-          //eqfeed_callback(latLngStates, data, stateIndex);
-        });
-      });
-      // displayData(stateSearch, data);
-      // console.log(data);
-    });
-  });
+  zoomState(stateIndex, latLngStates);
+
+  // var apiOpenCovid = "https://api.covidtracking.com/v1/states/current.json";
+
+  // fetch(apiOpenCovid).then(function (response) {
+  //   response.json().then(function (data) {
+  //     var apiCovid = "https://api.covid19api.com/summary";
+  //     fetch(apiCovid).then(function (response) {
+  //       response.json().then(function (info) {
+          
+  //         //console.log(info);
+  //        // console.log(data);
+  //        apiOpenCovidData = data;
+  //        console.log(apiOpenCovidData);
+  //        displayData(stateIndex, data);
+  //        getMagnitude(data);
+  //        zoomState(stateIndex, latLngStates);
+  //        //eqfeed_callback(latLngStates, data, stateIndex);
+  //       });
+  //     });
+  //     // displayData(stateSearch, data);
+  //     // console.log(data);
+  //   });
+  // });
 };
 
-var getMagnitude = function(data) {
+// var getMagnitude = function(data) {
 
-  var stateMagnitude = [];
+//   var stateMagnitude = [];
 
-  for (i = 0; i < data.length; i++) {
-    var positive = data[i].positive;
-    stateMagnitude[i] = positive;
-    //console.log(stateMagnitude);
-  }
+//   for (i = 0; i < data.length; i++) {
+//     var positive = data[i].positive;
+//     stateMagnitude[i] = positive;
+//     //console.log(stateMagnitude);
+//   }
 
-  var highestCovidPositive = Math.max.apply(null, stateMagnitude);
+//   var highestCovidPositive = Math.max.apply(null, stateMagnitude);
   
-  console.log(stateMagnitude);
-  console.log(highestCovidPositive);
+//   console.log(stateMagnitude);
+//   console.log(highestCovidPositive);
   
-  var stateMagnitudUpdates = [];
+//   var stateMagnitudUpdates = [];
 
-  for (i = 0; i < stateMagnitude.length; i++) {
-    var mag = stateMagnitude[i];
-    stateMagnitudUpdates[i] = (mag / highestCovidPositive) * maxMagnitude;
-  };
-  console.log(stateMagnitudUpdates);
+//   for (i = 0; i < stateMagnitude.length; i++) {
+//     var mag = stateMagnitude[i];
+//     stateMagnitudUpdates[i] = (mag / highestCovidPositive) * maxMagnitude;
+//   };
+//   console.log(stateMagnitudUpdates);
   
 
-  eqfeed_callback(latLngStates, stateMagnitudUpdates);
-};
+//   eqfeed_callback(latLngStates, stateMagnitudUpdates);
+// };
 
 var displayData = function (stateIndex, data) {
   apiDataEl.textContent = "";
