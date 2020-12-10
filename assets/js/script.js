@@ -11,6 +11,10 @@ var saveButtonEl = document.querySelector("#save-btn");
 var symptomsLogArray = [];
 var clearButtonEl = document.querySelector("#clear-btn");
 
+const maxMagnitude = 50;
+var apiOpenCovidData = [];
+
+
 var stateCodeIndex = [
   "AK",
   "AL",
@@ -373,7 +377,7 @@ function initMap() {
 
 // Loop through the results array and place a marker for each
 // set of coordinates.
-const eqfeed_callback = function (latLngStates, data, stateIndex) {
+const eqfeed_callback = function (latLngStates, stateMagnitudUpdates) {
   for (let i = 0; i < latLngStates.length; i++) {
     const lat = latLngStates[i].latitude;
     const lng = latLngStates[i].longitude;
@@ -385,17 +389,27 @@ const eqfeed_callback = function (latLngStates, data, stateIndex) {
         path: google.maps.SymbolPath.CIRCLE,
         fillColor: "red",
         fillOpacity: 0.2,
-        scale: 10,
+        scale: stateMagnitudUpdates[i],
         //scale: Math.pow(2, magnitude) / 2,
         strokeColor: "white",
-        strokeWeight: 0.5,
+        strokeWeight: 0.5
       },
       map: map,
     });
   }
 };
 
-const latLngCall = function (stateCodeIndex) {};
+//const latLngCall = function (stateCodeIndex) {};
+
+const zoomState = function(stateIndex, latLngStates) {
+  map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 6.5,
+    center: { lat: latLngStates[stateIndex].latitude, lng: latLngStates[stateIndex].longitude }, //39.82916983397753, -98.57990885339983 geographic center of USA
+    mapTypeId: "roadmap",
+  });
+}
+
+
 
 // Create an li element
 const liMaker = (text) => {
@@ -432,6 +446,7 @@ var getStateData = function (stateSearch) {
           console.log(data);
           displayData(stateIndex, data);
           getMagnitude(data);
+          zoomState(stateIndex, latLngStates);
           //eqfeed_callback(latLngStates, data, stateIndex);
         });
       });
@@ -441,17 +456,31 @@ var getStateData = function (stateSearch) {
   });
 };
 
-var getMagnitude = function (data) {
+var getMagnitude = function(data) {
+
   var stateMagnitude = [];
 
   for (i = 0; i < data.length; i++) {
     var positive = data[i].positive;
-    stateMagnitude[i] = parseInt(positive);
+    stateMagnitude[i] = positive;
     //console.log(stateMagnitude);
   }
 
+  var highestCovidPositive = Math.max.apply(null, stateMagnitude);
+  
   console.log(stateMagnitude);
-  //console.log(Math.max(stateMagnitude));
+  console.log(highestCovidPositive);
+  
+  var stateMagnitudUpdates = [];
+
+  for (i = 0; i < stateMagnitude.length; i++) {
+    var mag = stateMagnitude[i];
+    stateMagnitudUpdates[i] = (mag / highestCovidPositive) * maxMagnitude;
+  };
+  console.log(stateMagnitudUpdates);
+  
+
+  eqfeed_callback(latLngStates, stateMagnitudUpdates);
 };
 
 var displayData = function (stateIndex, data) {
