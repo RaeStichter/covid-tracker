@@ -257,93 +257,88 @@
 
 </div>
 
+        <!-- state data -->
+        <div class="col s4">
+        <h4>COVID-19 Data by State</h4>
 
-    <!-- state data -->
+        <form class="pure-form pure-form-stacked" id="form">
+            <legend>Search for a State:</legend>
+            <!-- <input type="text" id="stacked-state" placeholder="State" /> -->
+            <select id="stacked-state">
+                <option value="AK">AK</option>
+                <option value="AL">AL</option>
+                <option value="AR">AR</option>
+                <option value="AS">AS</option>
+                <option value="AZ">AZ</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DC">DC</option>
+                <option value="DE">DE</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="GU">GU</option>
+                <option value="HI">HI</option>
+                <option value="IA">IA</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="MA">MA</option>
+                <option value="MD">MD</option>
+                <option value="ME">ME</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MO">MO</option>
+                <option value="MP">MP</option>
+                <option value="MS">MS</option>
+                <option value="MT">MT</option>
+                <option value="NC">NC</option>
+                <option value="ND">ND</option>
+                <option value="NE">NE</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NV">NV</option>
+                <option value="NY">NY</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="PR">PR</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VA">VA</option>
+                <option value="VI">VI</option>
+                <option value="VT">VT</option>
+                <option value="WA">WA</option>
+                <option value="WI">WI</option>
+                <option value="WV">WV</option>
+                <option value="WY">WY</option>
+            </select>
+            <button type="submit" class="waves-effect waves-light btn">Search</button>
+        </form>
 
+        <!-- Searched Cities -->
+        <h4>States</h4>
+        <ul id="searched-states"></ul>
+    
+        <button type="submit" class="waves-effect waves-light btn" id="clear-btn">Clear All</button>
 
-    <div class="col s4">
-    <h2>COVID-19 Data by State</h2>
+        <div id="api-data-display">
 
-    <form class="pure-form pure-form-stacked" id="form">
-        <legend>Search for a State:</legend>
-        <!-- <input type="text" id="stacked-state" placeholder="State" /> -->
-        <select id="stacked-state">
-            <option value="AK">AK</option>
-            <option value="AL">AL</option>
-            <option value="AR">AR</option>
-            <option value="AS">AS</option>
-            <option value="AZ">AZ</option>
-            <option value="CA">CA</option>
-            <option value="CO">CO</option>
-            <option value="CT">CT</option>
-            <option value="DC">DC</option>
-            <option value="DE">DE</option>
-            <option value="FL">FL</option>
-            <option value="GA">GA</option>
-            <option value="GU">GU</option>
-            <option value="HI">HI</option>
-            <option value="IA">IA</option>
-            <option value="ID">ID</option>
-            <option value="IL">IL</option>
-            <option value="IN">IN</option>
-            <option value="KS">KS</option>
-            <option value="KY">KY</option>
-            <option value="LA">LA</option>
-            <option value="MA">MA</option>
-            <option value="MD">MD</option>
-            <option value="ME">ME</option>
-            <option value="MI">MI</option>
-            <option value="MN">MN</option>
-            <option value="MO">MO</option>
-            <option value="MP">MP</option>
-            <option value="MS">MS</option>
-            <option value="MT">MT</option>
-            <option value="NC">NC</option>
-            <option value="ND">ND</option>
-            <option value="NE">NE</option>
-            <option value="NH">NH</option>
-            <option value="NJ">NJ</option>
-            <option value="NM">NM</option>
-            <option value="NV">NV</option>
-            <option value="NY">NY</option>
-            <option value="OH">OH</option>
-            <option value="OK">OK</option>
-            <option value="OR">OR</option>
-            <option value="PA">PA</option>
-            <option value="PR">PR</option>
-            <option value="RI">RI</option>
-            <option value="SC">SC</option>
-            <option value="SD">SD</option>
-            <option value="TN">TN</option>
-            <option value="TX">TX</option>
-            <option value="UT">UT</option>
-            <option value="VA">VA</option>
-            <option value="VI">VI</option>
-            <option value="VT">VT</option>
-            <option value="WA">WA</option>
-            <option value="WI">WI</option>
-            <option value="WV">WV</option>
-            <option value="WY">WY</option>
-        </select>
-        <button type="submit" class="waves-effect waves-light btn">Search</button>
-    </form>
+        </div>
+        </div>
 
-    <!-- Searched Cities -->
-    <h4>States</h4>
-    <ul id="searched-states"></ul>
- 
-    <button type="submit" class="waves-effect waves-light btn" id="clear-btn">Clear All</button>
-
-    <div id="api-data-display">
-
-    </div>
-    </div>
-
-    <!-- CDC recommendations-->
-    <div class="col s4" id="map" style="height: 300px;">
-    <h2>Latest CDC Recommendations</h2>
-    </div>
-
+        <!-- CDC recommendations-->
+        <div class="col s4" id="map" style="height: 300px;"></div>
+        <h5>Latest CDC Recommendations</h5>
 
 </div>
 

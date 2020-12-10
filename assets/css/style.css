@@ -3,11 +3,41 @@
 } */
 
 /* Style footer */
-/* body {
+nav {
   display: flex;
-  min-height: 100vh;
+  min-height: 10vh;
   flex-direction: column;
-} */
+}
+
+.nav-wrapper {
+background-color: rgb(46, 165, 155);
+}
+
+.row {
+  display: flex;
+  flex-shrink: 1;
+}
+
+.page-footer {
+  background-color: rgb(247, 78, 36);
+}
+h4 {
+  color: rgb(247, 78, 36);
+  size: 500px;
+}
+
+h5 {
+  color: rgb(247, 78, 36);
+  size: 500px;
+}
+
+.btn {
+	color: white;
+
+ul {
+  list-style-type: none;
+
+}
 
 /* main {
   flex: 1 0 auto;
@@ -21,29 +51,3 @@
   flex-direction: column;
 } */
 
-h2 {
-	color: rgb(233, 122, 122);
-}
-
-.btn {
-	font-weight: bold;
-}
-
-ul {
-	list-style-type: none;
-}
-
-.card-date {
-	font-size: 20px;
-	color: teal;
-	font-weight: bold;
-}
-
-.card-background {
-	color: white;
-	background-color: rgb(233, 122, 122);
-}
-
-.no-symptoms {
-	font-weight: bold;
-}
