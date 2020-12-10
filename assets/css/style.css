@@ -21,18 +21,14 @@
   flex-direction: column;
 } */
 
-/* .pure-form .pure-form-aligned {
+h2 {
   color: rgb(233, 122, 122);
-} */
-
-ul {
-	list-style-type: none;
 }
-
-/* .symptoms-form {
-	display: none;
-} */
 
 .btn {
 	color: white;
+
+ul {
+  list-style-type: none;
+
 }
