@@ -9,7 +9,6 @@ var searchedStatesEl = document.querySelector("#searched-states");
 var clearButtonEl = document.querySelector("#clear-btn");
 var saveButtonEl = document.querySelector("#save-btn");
 var symptomsLogArray = [];
-
 var clearButtonEl = document.querySelector("#clear-btn");
 
 var stateCodeIndex = [
@@ -743,6 +742,5 @@ $("#dateofsymptoms").datepicker({
 
 // Or with jQuery
 
-$(document).ready(function () {
-  $(".modal").modal();
-});
+
+
