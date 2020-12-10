@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -238,23 +239,23 @@
                             </div>
                             
                             <div class="modal-footer">
-                            <button type="submit" class="pure-button pure-button-primary" id="save-btn">Save</button>
+                            <button type="submit" class="waves-effect waves-light btn" id="save-btn">Save</button>
                             </div>
 
                     </form>
         
 
-
-            <div class="pure-controls pure-button pure-button-primary">
-            <a href="./symptoms.html">
+            </br>
+            <div class="waves-effect waves-light btn view-symptoms-btn">
+            <a href="./symptoms.html" style="color:white;" style="font-weight:normal;">
               View All Symptoms
             </a>
             </div> 
 
-    </div>
+</div>
 
 
-    <!-- city data -->
+    <!-- state data -->
 
 
     <div class="col s4">
@@ -321,14 +322,14 @@
             <option value="WV">WV</option>
             <option value="WY">WY</option>
         </select>
-        <button type="submit" class="pure-button pure-button-primary">Search</button>
+        <button type="submit" class="waves-effect waves-light btn">Search</button>
     </form>
 
     <!-- Searched Cities -->
     <h4>States</h4>
     <ul id="searched-states"></ul>
  
-    <button type="submit" class="pure-button pure-button-primary" id="clear-btn">Clear All</button>
+    <button type="submit" class="waves-effect waves-light btn" id="clear-btn">Clear All</button>
 
     <div id="api-data-display">
 

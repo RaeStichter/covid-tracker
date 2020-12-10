@@ -29,6 +29,10 @@ ul {
 	list-style-type: none;
 }
 
-.symptoms-form {
+/* .symptoms-form {
 	display: none;
+} */
+
+.btn {
+	color: white;
 }
