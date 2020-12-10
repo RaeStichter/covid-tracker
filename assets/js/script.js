@@ -660,6 +660,7 @@ var printStateList = function () {
   searchedStatesEl.textContent = "";
   for (i = 0; i < searchedStatesArray.length; i++) {
     var searchedState = $("<li>").text(searchedStatesArray[i]);
+    searchedState.addClass("state-click");
     $(searchedStatesEl).append(searchedState);
   }
 };
@@ -807,7 +808,15 @@ for (i = 0; i < coll.length; i++) {
   });
 }
 
-// });
+$(searchedStatesEl).on("click", function(event) {
+  if (event.target.classList.contains("state-click")) {
+    var currentStateClick = event.target.innerHTML;
+  }
+  else {
+    return
+  }
+  getStateData(currentStateClick);
+});
 
 // event listener for save symptoms button
 $(saveButtonEl).on("click", function (event) {
