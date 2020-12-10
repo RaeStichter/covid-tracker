@@ -22,13 +22,28 @@
 } */
 
 h2 {
-  color: rgb(233, 122, 122);
+	color: rgb(233, 122, 122);
 }
 
 .btn {
-	color: white;
+	font-weight: bold;
+}
 
 ul {
-  list-style-type: none;
+	list-style-type: none;
+}
 
+.card-date {
+	font-size: 20px;
+	color: teal;
+	font-weight: bold;
+}
+
+.card-background {
+	color: white;
+	background-color: rgb(233, 122, 122);
+}
+
+.no-symptoms {
+	font-weight: bold;
 }

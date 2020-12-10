@@ -3,28 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+    <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>COVID-19 Symptoms Log</title>
+    <title>COVID-19 Symptoms History</title>
 </head>
 <body>
     
 <!-- header -->
 <header>
-    <h1>COVID-19 Symptoms Log</h1>
+    <h2>COVID-19 Symptoms History</h2>
 </header>
 
-<div class="pure-controls pure-button pure-button-primary">
-    <a href="./index.html">
-      Go Back
-    </a>
-</div>
-
+<!-- buttons to return to main pg-->
 <!-- display list of symptoms from local storage-->
-<div id="symptoms-container"> 
+<div class="row">
+    <div class="col s4"> 
 
+    <div class="waves-effect waves-light btn view-symptoms-btn">
+        <a href="./index.html" style="color:white;">
+            Go Back
+        </a>
+    </div>
 
+    <div class="waves-effect waves-light btn view-symptoms-btn" id="clear-symptoms-btn">
+        <a href="./index.html" style="color:white;">
+            Clear All Symptoms
+        </a>
+    </div>
+
+    </div>
 </div>
+       
+<div class="row">
+    <div class="col s3">
+        <div id="symptoms-container">
+        </div>
+    </div>
+</div>
+    
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src = "./assets/symptoms.js"></script>
