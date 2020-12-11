@@ -36,7 +36,10 @@ The COVID-19 Tracker is brought to you by a group of students from the UPenn LPS
 
 ## Technologies Used
 
--
+- Materialize CSS Framework
+- Pure CSS Framework
+- JQuery
+- APIs: Open Source Covid Project, Google Maps
 
 ## Screenshot
 
