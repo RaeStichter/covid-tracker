@@ -2,8 +2,8 @@
 
 ## Contributors
 
-### Rae Stichter
+- Rae Stichter
 
-### Zoe King
+- Zoe King
 
-### Braudy Herrera
+- Braudy Herrera
