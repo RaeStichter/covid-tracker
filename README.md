@@ -36,10 +36,11 @@ The COVID-19 Tracker is brought to you by a group of students from the UPenn LPS
 
 ## Technologies Used
 
-- 
+-
 
 ## Screenshot
 
-
-
 ## Links
+
+- Deployed: https://raestichter.github.io/covid-tracker/ <br>
+- GitHub repo: https://github.com/RaeStichter/covid-tracker.git <br><br>
