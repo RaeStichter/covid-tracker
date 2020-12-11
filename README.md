@@ -43,7 +43,8 @@ The COVID-19 Tracker is brought to you by a group of students from the UPenn LPS
 
 ## Screenshot
 
-![webpage image](./assets/images/covid-19_tracker_screenshot1.JPG) <br>![webpage image](./assets/images/covid-19_tracker_screenshot2.JPG) <br><br>
+![webpage image](./assets/images/covid-19_tracker_screenshot1.JPG) <br>
+![webpage image](./assets/images/covid-19_tracker_screenshot2.JPG)
 
 ## Links
 
