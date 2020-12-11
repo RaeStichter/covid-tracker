@@ -4,39 +4,51 @@
 
 /* Style footer */
 nav {
-  display: flex;
-  min-height: 10vh;
-  flex-direction: column;
+	display: flex;
+	min-height: 10vh;
+	flex-direction: column;
 }
 
 .nav-wrapper {
-background-color: rgb(46, 165, 155);
+	background-color: rgb(46, 165, 155);
 }
 
-.row {
-  display: flex;
-  flex-shrink: 1;
+.row-main {
+	display: flex;
+	flex-shrink: 1;
 }
 
 .page-footer {
-  background-color: rgb(247, 78, 36);
+	background-color: rgb(247, 78, 36);
 }
 h4 {
-  color: rgb(247, 78, 36);
-  size: 500px;
+	color: rgb(247, 78, 36);
+	size: 500px;
 }
 
 h5 {
-  color: rgb(247, 78, 36);
-  size: 500px;
+	color: rgb(247, 78, 36);
+	size: 500px;
 }
 
 .btn {
 	color: white;
+	font-weight: bold;
+}
 
 ul {
-  list-style-type: none;
+	list-style-type: none;
+}
 
+.card-background {
+	background-color: rgb(247, 78, 36);
+	color: white;
+}
+
+.card-date {
+	font-size: 20px;
+	color: teal;
+	font-weight: bold;
 }
 
 /* main {
@@ -50,4 +62,3 @@ ul {
   min-height: 100vh;
   flex-direction: column;
 } */
-

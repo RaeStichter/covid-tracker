@@ -1,22 +1,26 @@
-// Variables for the elements on the page
-const form = document.querySelector("#form"); // RS added #
+// -----------------------------------------Variables and setup arrrays -----------------------------------------
+// Variables for the elements on the page to be used for DOM manipulation
+const form = document.querySelector("#form");
 const ul = document.querySelector("ul");
 const button = document.querySelector("button");
 const input = document.getElementById("stacked-state");
 const apiDataEl = document.getElementById("api-data-display");
-var searchedStatesArray = [];
 var searchedStatesEl = document.querySelector("#searched-states");
 var clearButtonEl = document.querySelector("#clear-btn");
 var saveButtonEl = document.querySelector("#save-btn");
-var symptomsLogArray = [];
 var clearButtonEl = document.querySelector("#clear-btn");
 
-const maxMagnitude = 50; // set base value for the magnitude markers on Google maps
+// Variables for empty arrays which will be populated
+var searchedStatesArray = [];
+var symptomsLogArray = [];
 var apiOpenCovidData = []; // covid data called from the Open Covid Project API
 var magnitudes = []; // magnitudes of state data
 
+// Variable non array set
+const maxMagnitude = 50; // set base value for the magnitude markers on Google maps
+
 // Set the index of the states (array)
-var stateCodeIndex = [
+const stateCodeIndex = [
   "AK",
   "AL",
   "AR",
@@ -74,7 +78,6 @@ var stateCodeIndex = [
   "WV",
   "WY",
 ];
-
 // Latitude and Longitude of all states (array)
 const latLngStates = [
   {
@@ -365,11 +368,11 @@ let map;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 3.6, 
+    zoom: 3.8, 
     center: { lat: 39.829169, lng: -98.579908 }, //39.82916983397753, -98.57990885339983 geographic center of USA
     mapTypeId: "roadmap",
   });
-  // Call function to get API data from OPen Covid
+  // Call function to get API data from Oen Covid
   getAPIData();
 }
 
@@ -382,25 +385,7 @@ var getAPIData = function() {
   fetch(apiOpenCovid).then(function (response) {
   response.json().then(function (data) {
     apiOpenCovidData = data;
-    console.log(apiOpenCovidData);
-    // var apiCovid = "https://api.covid19api.com/summary";
-    // fetch(apiCovid).then(function (response) {
-    //   response.json().then(function (info) {
-        
-    //     //console.log(info);
-    //    // console.log(data);
-    //    apiOpenCovidData = data;
-    //    console.log(apiOpenCovidData);
-    //    displayData(stateIndex, data);
-    //    getMagnitude(data);
-    //    zoomState(stateIndex, latLngStates);
-    //    //eqfeed_callback(latLngStates, data, stateIndex);
-    //   });
-    // });
-    // // displayData(stateSearch, data);
-    // // console.log(data);
-
-
+   
     // Call function to get magnitude for the data points for Google Maps
     getMagnitude(apiOpenCovidData);
   });
@@ -416,12 +401,8 @@ var getMagnitude = function(data) {
     var positive = data[i].positive;
     stateMagnitude[i] = positive;
   }
-
   // Find the highest of the positive cases
   var highestCovidPositive = Math.max.apply(null, stateMagnitude);
-  
-  // console.log(stateMagnitude);
-  // console.log(highestCovidPositive);
   
   // Loop through the positve cases and find a percentage of the max magnitude (to be used for display)
   var stateMagnitudUpdates = [];
@@ -430,9 +411,10 @@ var getMagnitude = function(data) {
     // Current array value, divided by the highest value, multiplied by the max magnetude variable
     stateMagnitudUpdates[i] = (mag / highestCovidPositive) * maxMagnitude;
   };
-  //console.log(stateMagnitudUpdates);
+  
   // update gloabl variable 
   magnitudes = stateMagnitudUpdates;
+
   // Call the call back function to populate the map with the magnitudes
   eqfeed_callback(latLngStates, stateMagnitudUpdates);
 };
@@ -444,7 +426,7 @@ const eqfeed_callback = function (latLngStates, stateMagnitudUpdates) {
     // get latitude and longitude data from the array
     const lat = latLngStates[i].latitude;
     const lng = latLngStates[i].longitude;
-    //console.log(lat, lng);
+    
     // locate on the map
     const latLng = new google.maps.LatLng(lat, lng);
     // add markers (magnitude to the map)
@@ -463,37 +445,6 @@ const eqfeed_callback = function (latLngStates, stateMagnitudUpdates) {
   }
 };
 
-const zoomState = function(stateIndex, latLngStates) {
-  var lat = latLngStates[stateIndex].latitude;
-  var lng = latLngStates[stateIndex].longitude;
-  map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 6,
-    center: { lat: lat, lng: lng }, //39.82916983397753, -98.57990885339983 geographic center of USA
-    mapTypeId: "roadmap",
-  });
-
-  // locate on the map
-  const latLng = new google.maps.LatLng(lat, lng);
-  // add markers (magnitude to the map)
-  new google.maps.Marker({
-    position: latLng,
-    icon: {
-      path: google.maps.SymbolPath.CIRCLE,
-      fillColor: "red",
-      fillOpacity: 0.2,
-      scale: magnitudes[stateIndex],
-      strokeColor: "white",
-      strokeWeight: 0.5
-    },
-    map: map,
-  });
-  // // Call update magnitude function
-  // //)
-  // //eqfeed_callback(latLngStates, stateMagnitudUpdates);
-}
-
-
-
 // Create an li element
 const liMaker = (text) => {
   const li = document.createElement("li");
@@ -501,89 +452,30 @@ const liMaker = (text) => {
   ul.appendChild(li);
 };
 
-// Event listener to listen for the submit on the form
-// form.addEventListener("submit", function (e) {
-//   e.preventDefault();
-
-//   liMaker(input.value);
-//   input.value = "";
-// });
-
 // ----------------------------------------- Get State Data -----------------------------------------
-
+// get searched state, find the index of the state in the list and send information to various functions
 var getStateData = function (stateSearch) {
-  console.log("get state data was called, this is where APIS will be called.");
 
   // get index of state to be used in DisplayData
   var stateIndex = stateCodeIndex.indexOf(stateSearch);
-  //console.log(stateIndex);
 
   // Call the function to display the state data in the DOM
   displayData(stateIndex, apiOpenCovidData);
 
+  // call function to zoom in on the state selected
   zoomState(stateIndex, latLngStates);
-
-  // var apiOpenCovid = "https://api.covidtracking.com/v1/states/current.json";
-
-  // fetch(apiOpenCovid).then(function (response) {
-  //   response.json().then(function (data) {
-  //     var apiCovid = "https://api.covid19api.com/summary";
-  //     fetch(apiCovid).then(function (response) {
-  //       response.json().then(function (info) {
-          
-  //         //console.log(info);
-  //        // console.log(data);
-  //        apiOpenCovidData = data;
-  //        console.log(apiOpenCovidData);
-  //        displayData(stateIndex, data);
-  //        getMagnitude(data);
-  //        zoomState(stateIndex, latLngStates);
-  //        //eqfeed_callback(latLngStates, data, stateIndex);
-  //       });
-  //     });
-  //     // displayData(stateSearch, data);
-  //     // console.log(data);
-  //   });
-  // });
 };
 
-// var getMagnitude = function(data) {
-
-//   var stateMagnitude = [];
-
-//   for (i = 0; i < data.length; i++) {
-//     var positive = data[i].positive;
-//     stateMagnitude[i] = positive;
-//     //console.log(stateMagnitude);
-//   }
-
-//   var highestCovidPositive = Math.max.apply(null, stateMagnitude);
-  
-//   console.log(stateMagnitude);
-//   console.log(highestCovidPositive);
-  
-//   var stateMagnitudUpdates = [];
-
-//   for (i = 0; i < stateMagnitude.length; i++) {
-//     var mag = stateMagnitude[i];
-//     stateMagnitudUpdates[i] = (mag / highestCovidPositive) * maxMagnitude;
-//   };
-//   console.log(stateMagnitudUpdates);
-  
-
-//   eqfeed_callback(latLngStates, stateMagnitudUpdates);
-// };
-
+// ----------------------------------------- Display State Data -----------------------------------------
+// take the API mass of data, parse out needed information and populate the DOM
 var displayData = function (stateIndex, data) {
+  // initial clear if there is anything present in the states space
   apiDataEl.textContent = "";
 
-  console.log(stateIndex, data);
-
-  // ------------ Variables for all of the state information
+  //  Variables for all of the state information we want contained in an array of objects
   var stateInfo = [
     {
       stat: "State: ",
-
       data: data[stateIndex].state,
     },
     {
@@ -615,18 +507,6 @@ var displayData = function (stateIndex, data) {
       data: data[stateIndex].total,
     },
   ];
-  // var state = data[stateIndex].state;
-  // var positiveCases = data[stateIndex].positive;
-  // var deaths = data[stateIndex].death;
-  // var hospitalCurrent = data[stateIndex].hospitalizedCurrently;
-  // var caseTotal = data[stateIndex].total;
-  // var negativeTest = data[stateIndex].negative;
-  // var probableCases = data[stateIndex].probableCases;
-  // var recoveredCases = data[stateIndex].recovered;
-
-  console.log(stateInfo);
-
-  //console.log(state, positiveCases, deaths,hospitalCurrent, caseTotal, negativeTest, probableCases, recoveredCases);
 
   // create a container for the state data
   var stateData = document.createElement("div");
@@ -636,22 +516,33 @@ var displayData = function (stateIndex, data) {
     // create a span element to hold the data
     var stateNameEl = document.createElement("div");
 
+    // populate the state name and the data
     stateNameEl.textContent = stateInfo[i].stat + stateInfo[i].data;
-    //console.log(stateNameEl);
 
     // append to container
     stateData.appendChild(stateNameEl);
   }
-
-  // create a span element for the total positive cases
-  //var positiveCasesEl = document.createElement("span");
-
   // append conatiner to DOM
   apiDataEl.appendChild(stateData);
 };
 
-// function to display list of searched states from local storage
+// ----------------------------------------- Zoom Function -----------------------------------------
+// Zoom in on the state that the user selected
+const zoomState = function(stateIndex, latLngStates) {
+  var lat = latLngStates[stateIndex].latitude;
+  var lng = latLngStates[stateIndex].longitude;
+  map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 6.5,
+    center: { lat: lat, lng: lng }, //39.82916983397753, -98.57990885339983 geographic center of USA
+    mapTypeId: "roadmap",
+  });
+  
+  // callback to ensure that the magnetudes are reloaded on the map
+  eqfeed_callback(latLngStates, magnitudes);
+};
 
+// ----------------------------------------- Load Local Storage -----------------------------------------
+// function to display list of searched states from local storage
 var printStateList = function () {
   var stateList = JSON.parse(localStorage.getItem("states"));
   if (stateList) {
@@ -665,10 +556,10 @@ var printStateList = function () {
   }
 };
 
+// ----------------------------------------- Submit Handler -----------------------------------------
 var formSubmitHandler = function (event) {
   event.preventDefault(); // prevents default action of browser, we then can specify what to do
-  console.log("function was called");
-
+  
   var stateSearch = input.value.trim(); // this will get the user input from the form
 
   // save to local storage
@@ -700,6 +591,7 @@ var formSubmitHandler = function (event) {
 // call function to display list of searched states
 printStateList();
 
+// -----------------------------------------Clear Searched States -----------------------------------------
 // function to clear searched states
 var clearStates = function () {
   localStorage.removeItem("states");
@@ -707,6 +599,7 @@ var clearStates = function () {
   searchedStatesEl.textContent = "";
 };
 
+// ----------------------------------------- Save Symptoms to Local Storage -----------------------------------------
 // function to save symptoms to local storage
 var saveSymptoms = function () {
   var symptomList = JSON.parse(localStorage.getItem("symptoms"));
@@ -776,22 +669,22 @@ var saveSymptoms = function () {
   }
 
   symptomsLogArray.push(symptomsArray);
-  console.log(symptomsArray);
-  console.log(symptomsLogArray);
 
   // save symptoms to local storage
   localStorage.setItem("symptoms", JSON.stringify(symptomsLogArray));
 };
 
+// ----------------------------------------- Submit Button -----------------------------------------
 form.addEventListener("submit", formSubmitHandler);
 
+// -----------------------------------------Clear All Button -----------------------------------------
 // event listener for clear all button
-
 $(clearButtonEl).on("click", function (event) {
   event.preventDefault();
   clearStates();
 });
 
+// -----------------------------------------Symptoms List -----------------------------------------
 // event listener for collapsible symptoms list
 var coll = document.getElementsByClassName("collapsible");
 var i;
@@ -807,7 +700,7 @@ for (i = 0; i < coll.length; i++) {
     }
   });
 }
-
+// ----------------------------------------- State History Clicked On -----------------------------------------
 $(searchedStatesEl).on("click", function(event) {
   if (event.target.classList.contains("state-click")) {
     var currentStateClick = event.target.innerHTML;
@@ -818,6 +711,7 @@ $(searchedStatesEl).on("click", function(event) {
   getStateData(currentStateClick);
 });
 
+// ----------------------------------------- Save Button for symptoms -----------------------------------------
 // event listener for save symptoms button
 $(saveButtonEl).on("click", function (event) {
   // if no input for date, alert
@@ -870,6 +764,3 @@ $("#dateofsymptoms").datepicker({
 // });
 
 // Or with jQuery
-
-
-
